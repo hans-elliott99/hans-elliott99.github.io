@@ -1,37 +1,22 @@
-## Welcome to GitHub Pages
+## Welcome
+I am a graduate student in economics, interested in economic research and data analysis, among other things.
+Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/)
 
-You can use the [editor on GitHub](https://github.com/hans-elliott99/hans-elliott99.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+## Projects
+### Mass Mobilization Analysis
+[Check out my brief analysis of worldwide protest data.]()
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### GIS
+Sufficient experience with ArcGIS and working knoweldge of QGIS and Blender.
+[Data Visualization]
+[C(art)ograhpy]
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Undergraduate Thesis
+An undergraduate economics thesis about the Oregon labor market and community colleges.
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hans-elliott99/hans-elliott99.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Contact
+hanselliott61 @ gmail.com

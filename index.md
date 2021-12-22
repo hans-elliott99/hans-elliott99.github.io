@@ -4,7 +4,7 @@ Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/)
 
 ## Projects
 ### Mass Mobilization Analysis
-[Check out my brief analysis of worldwide protest data.](hans-elliott99.github.io/blob/main/AntistateProtests.html)
+[Check out my brief analysis of worldwide protest data.](https://hans-elliott99.github.io/AntistateProtests.html)
 
 ### GIS
 Sufficient experience with ArcGIS and working knoweldge of QGIS and Blender.  

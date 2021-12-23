@@ -16,8 +16,8 @@ Sufficient experience with ArcGIS and working knoweldge of QGIS and Blender.
 
 
 #### Undergraduate Thesis
-An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.
-PDF [here](https://hans-elliott99.github.io/HansElliott_Thesis.pdf)
+An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
+[View PDF here](https://hans-elliott99.github.io/HansElliott_Thesis.pdf).
 
 
 ### Contact

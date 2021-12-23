@@ -1,4 +1,6 @@
-![](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/me.jpg)
+![me](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/me.jpg)
+<img src="me.jpg" alt="me" width="200"/>
+
 ## Welcome
 I am a graduate student in economics, interested in economic research and data analysis, among other things.
 Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/) and my [résumé](https://hans-elliott99.github.io/Resume.html).

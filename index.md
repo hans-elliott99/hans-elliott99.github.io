@@ -1,4 +1,3 @@
-![me](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/me.jpg)
 <img src="me.jpg" alt="me" width="200"/>
 
 ## Welcome

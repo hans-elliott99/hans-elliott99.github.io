@@ -4,13 +4,12 @@
 I am a graduate student in economics, interested in economic research and data analysis, among other things.
 Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/) and my [résumé](https://hans-elliott99.github.io/Resume.html).
 
-## Projects
-#### Mass Mobilization Analysis
-[Check out my brief analysis of worldwide protest data.](https://hans-elliott99.github.io/AntistateProtests.html)
+## Recent Projects
+#### Mass Mobilization Data Analysis
+Did you know that when state governments choose to respond with force to protests, they increase the likelihood that future protesters use violence?
+[Read my "blog post" about anti-state mobilizations here.](https://hans-elliott99.github.io/AntistateProtests.html)
 
 #### GIS
-Sufficient experience with ArcGIS and working knoweldge of QGIS and Blender.  
-
 [Data Visualization](https://hans-elliott99.github.io/GIS_I_Project.html)  
 
 [C(art)ograhpy](https://hans-elliott99.github.io/C-art-ography.html)  
@@ -21,5 +20,5 @@ An undergraduate economics thesis about the Oregon labor market and community co
 [View PDF here](https://hans-elliott99.github.io/HansElliott_Thesis.pdf).
 
 
-### Contact
+### Contact Me
 hanselliott61 @ gmail.com

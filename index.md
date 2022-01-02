@@ -2,8 +2,10 @@
 
 ## Welcome
 I am a graduate student in economics, interested in economic research and data analysis, among other things.
-Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  
-and my [résumé](https://hans-elliott99.github.io/Resume.html).
+Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/).    
+<center>
+[Résumé](https://hans-elliott99.github.io/Resume.html).
+</center>
 
 ## Recent Projects
 #### Mass Mobilization Data Analysis
@@ -11,8 +13,8 @@ Did you know that when state governments choose to respond with force to protest
 [Read my "blog post" about anti-state mobilizations here.](https://hans-elliott99.github.io/MassMobilBlogPost.html)
 
 #### GIS
-[Data Viz](https://hans-elliott99.github.io/GIS_I_Project.html)  
-
+[Premier League History Web Map](https://hans-elliott99.github.io/PLHistoryPost.html)  
+[Oregon Climate Change](https://hans-elliott99.github.io/GIS_I_Project.html)  
 [C(art)ograhpy](https://hans-elliott99.github.io/C-art-ography.html)  
 
 

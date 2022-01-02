@@ -2,10 +2,9 @@
 
 ## Welcome
 I am a graduate student in economics, interested in economic research and data analysis, among other things.
-Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/).    
-<center>
+Check out my [LinkedIn](https://www.linkedin.com/in/hans-elliott/).  
+
 [Résumé](https://hans-elliott99.github.io/Resume.html)
-</center>
 
 ## Recent Projects
 #### Mass Mobilization Data Analysis

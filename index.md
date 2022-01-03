@@ -1,7 +1,7 @@
 <img src="me.jpg" alt="me" width="200"/>
 
 ## Welcome
-I am a graduate student in economics, interested in economic research and data analysis, among other things.  
+I am a graduate student studying economics, interested in economic research and data analysis, among other things.  
 
 [LinkedIn](https://www.linkedin.com/in/hans-elliott/).  
 [Résumé](https://hans-elliott99.github.io/Resume.html)

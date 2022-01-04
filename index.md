@@ -16,10 +16,12 @@ Did you know that when state governments choose to respond with force to protest
 [Oregon Climate Change Project](https://hans-elliott99.github.io/GIS_I_Project.html)  
 [C(art)ograhpy](https://hans-elliott99.github.io/C-art-ography.html)  
 
+### Economic Forecasting
+[Consumer Spending Forecast](https://hans-elliott99.github.io/EconomicForecasting.pdf)
 
 #### Undergraduate Thesis
 An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
-[View PDF here](https://hans-elliott99.github.io/HansElliott_Thesis.pdf).
+[View PDF here.](https://hans-elliott99.github.io/HansElliott_Thesis.pdf)
 
 
 ### Contact Me

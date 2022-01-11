@@ -120,7 +120,7 @@ plot_grid(p, ncol = 1, rel_heights = c(0.1,1))
 The table below shows regression results for the linear models in the figures above. Heteroskedasticity-consistent robust standard errors were calculated for all regressions in this section.
 
 ```{r,echo=FALSE,results='asis'}
-## stargazer table for reg results
+## Regression Results
 #(calculate robust standard errors with 'sandwich' package)
 se_lmP  <- sqrt(diag(vcovHC(lmP)))
 se_lmP2  <- sqrt(diag(vcovHC(lmP2)))
@@ -128,6 +128,7 @@ se_lmV  <- sqrt(diag(vcovHC(lmV)))
 se_lmNV <- sqrt(diag(vcovHC(lmNV)))
 se_lmV_Y <- sqrt(diag(vcovHC(lmV_Y)))
 #
+# display results in table with 'stargazer' package
 stargazer(lmP,lmP2,lmV,lmNV,lmV_Y,
           se = list(se_lmP,se_lmP2,se_lmV,se_lmNV,se_lmV_Y),
           keep.stat=c("n","rsq"), omit = "Constant",
@@ -251,6 +252,7 @@ MMprotests <- MMprotests[!is.na(MMprotests$stateresponse1),]
 
 I start my analysis by seeking to answer a simple question: were anti-state protests more likely to be violent if there had already been a violent protest that year? This first requires classifying the protests into blocks by country and year, so that each block of protests occurred in the same country during the same year. Not every given "country-year" block has multiple protests, but the following histogram shows that a significant number of them have at least 2. 
 ```{r, fig.align='center',fig.width=4,fig.height=4}
+# Generate Histogram
 MMprotests %>%
   ggplot(aes(x = protestnumber)) + theme_bw()+
   geom_histogram(binwidth = 1,fill="#996666",) +
@@ -271,26 +273,18 @@ Again, heteroskedasticity-consistent robust standard errors are calculated for a
 MMprotests <- MMprotests %>% group_by(id.year) %>%
   mutate(protesterviolence.lag1 = lag(protesterviolence, n=1, default = NA))
 sum(is.na(MMprotests$protesterviolence.lag1))
-#2920 NAs
 
 MMprotests <- MMprotests %>% group_by(id.year) %>%
   mutate(protesterviolence.lag2 = lag(protesterviolence, n=2, default = NA))
 sum(is.na(MMprotests$protesterviolence.lag2))
-#5039 NAs
 
 ## Recoding NAs
-# I want to include the NAs in reg to control for effect of there not being a 
-# past protest in the country-year group
-MMprotests$protesterviolence.lag1 <- MMprotests$protesterviolence.lag1 %>% #prior: replace_na('none')
+# NAs represent no prior protest
+MMprotests$protesterviolence.lag1 <- MMprotests$protesterviolence.lag1 %>%
   replace_na(0)
 MMprotests$protesterviolence.lag2 <- MMprotests$protesterviolence.lag2 %>%
   replace_na(0)
-# Turn protesterviolence lag variables into factors
-#MMprotests <- MMprotests %>% 
-#  mutate(protesterviolence.lag1 = factor(protesterviolence.lag1, levels = c(
-#    "none",1,0)),
-#    protesterviolence.lag2 = factor(protesterviolence.lag2, levels = c(
-#      "none",1,0)))
+
 
 ## Regress protester violence on lags.
 pv_lag <- lm(protesterviolence ~ protesterviolence.lag1 + protesterviolence.lag2,
@@ -298,7 +292,7 @@ pv_lag <- lm(protesterviolence ~ protesterviolence.lag1 + protesterviolence.lag2
 se_pv_lag  <- sqrt(diag(vcovHC(pv_lag)))
 ```
 ```{r, results='asis'}
-#Table updated after simplifying regression (Hans: see original file for original code)
+# Regression results
 stargazer(pv_lag,se = list(se_pv_lag),
           type = "html",
           covariate.labels = c("Protester Violence in Period T-1",
@@ -322,6 +316,7 @@ The constant in this regression shows the likelihood of protester violence in pe
 
 States can respond to mass mobilizations in a variety of ways, whether they choose to ignore the protesters, accommodate their demands, or turn to more forceful methods. For the sake of maintaining peace and order, a state government might like to know how best to respond to an anti-state protest. The researchers have classified the state response to each mass mobilization as one of the seven categories seen in the figure below.
 ```{r,fig.align='center'}
+## Create grouped bar chart of state responses
 MMresponse <- MMprotests %>% 
   group_by(stateresponse1) %>%
   summarise(count = n(),
@@ -347,14 +342,17 @@ The following regression estimates the likelihood of protester violence given th
 where $\alpha =$ baseline and is the likelihood of the state response being accommodation of protester demands.
 
 ```{r,echo=FALSE,results='asis'}
+# Convert stateresponse variable to factor
 MMprotests <- MMprotests %>% 
   mutate(stateresponse1 = factor(stateresponse1, levels = c(
     "accomodation","ignore","crowd dispersal", "arrests",
     "beatings", "shootings", "killings"
   )))
+#regress protester violence on type of state response
 m1 <- lm(protesterviolence ~ stateresponse1, data = MMprotests)
 se_m1  <- sqrt(diag(vcovHC(m1)))
 
+#results
 stargazer(m1, se = list(se_m1),
           type = "html", keep.stat = c("n","rsq"),
           dep.var.labels = "Probability that Protesters are Violent",
@@ -380,6 +378,7 @@ To attempt to get some more answers, I utilize a lag variable. It seems possible
 
 where $\alpha =$ the baseline of no prior protests (the likelihood of violence if it's the first protest in a given country and year).
 ```{r,echo=FALSE,results='asis'}
+# Create stateresponse lag
 MMprotests <- MMprotests %>% group_by(id.year) %>%
   mutate(stateresponse.lag1 = lag(stateresponse1, n=1, default = "none"))
 
@@ -388,7 +387,7 @@ MMprotests <- MMprotests %>%
     "none","accomodation","ignore","crowd dispersal", "arrests",
     "beatings", "shootings", "killings"
   )))
-
+# Regress protester violence on lag of stateresponse
 lag_sr1 <- lm(protesterviolence ~ stateresponse.lag1, data = MMprotests)
 se_lag_sr1  <- sqrt(diag(vcovHC(lag_sr1)))
 stargazer(lag_sr1, se = list(se_lag_sr1),
@@ -421,6 +420,7 @@ where $\alpha =$ the baseline which is the likelihood of the state response when
 
 I repeat this regression 7 total times for each type of state response.
 ```{r,echo=FALSE, results='hide'}
+# Create dummy variables for each state response
 MMprotests <- MMprotests %>% mutate(
   state_accom = ifelse(stateresponse1=="accomodation",1,0),
   state_ignore = ifelse(stateresponse1=="ignore",1,0),
@@ -430,6 +430,8 @@ MMprotests <- MMprotests %>% mutate(
   state_shoot = ifelse(stateresponse1=="shootings",1,0),
   state_kill = ifelse(stateresponse1=="killings",1,0)
 )
+
+# regress each state response type on protester violence and lag
 p.s_accom <- lm(state_accom~protesterviolence + protesterviolence.lag1,
                 data = MMprotests)
   se_accom  <- sqrt(diag(vcovHC(p.s_accom)))
@@ -459,6 +461,7 @@ table, td, th {
 }
 ```
 ```{r,echo=FALSE,results='asis'}
+# Results
 stargazer(p.s_accom,p.s_ignore,p.s_crowd,p.s_arrests,p.s_beat,p.s_shoot,p.s_kill,
           se=list(se_accom,se_ignore,se_crowd,se_arrests,se_beat,se_shoot,se_kill),
           type = "html", order =
@@ -483,6 +486,7 @@ Overall, the magnitudes of the coefficients on the protester violence lag are mu
 
 As a final measure, I want to consider the immense variation in the protests being evaluated here. It is a big stretch to assume that the given country a protest occurs in does not influence protester violence or state response. There are naturally a variety of factors that contribute to these moments, including the unique social and political contexts of a country in a given time. Further, we have seen that the yearly frequency of protests has increased quickly over the past decade. The graph below shows that states have disproportionately responded to this onslaught of protests by either ignoring them or using crowd dispersal mechanisms. Accommodation, arrests, or shootings, beating, and killings have remained relatively uncommon responses in comparison.
 ```{r, warning=FALSE,message=FALSE,fig.align='center'}
+# Create time series graph of state response types
 mmYearResp <- MMprotests %>% group_by(year) %>% summarise(
   count_accom = sum(state_accom),
   count_ignore = sum(state_ignore),
@@ -508,6 +512,7 @@ mmYearResp %>% ggplot() + theme_minimal() +
  As a final measure, I control for the effects of time and country on the likelihood of a state response when a protest is violent. I focus on the ignore and crowd dispersal responses, because they were most frequent and changed the most over time. Here I use protester violence in the last period as a sort of treatment to determine the likelihood of the state responses while using year and group (country) fixed effects. The fixed effects absorb the impact of time and being in a given country on the likelihood of the given state response so that any changes in the dependent variable (the likelihood of the state response) must be due to influences other than the fixed characteristics. 
 
 ```{r,warning=FALSE,message=FALSE,results='asis',fig.align='left'}
+# Use 'fixest' package to run regression with group fixed effects
 p_load(fixest)
 mod <- list()
 mod[['Ignore']] <- feols(state_ignore ~ protesterviolence.lag1 + protesterviolence | country + year,
@@ -516,6 +521,7 @@ mod[['Crowd Dispersal']] <- feols(
   state_crowd.disp ~ protesterviolence.lag1 + protesterviolence | country + year,
       data=MMprotests,cluster="country")
 
+# display results using 'modelsummary' package
 p_load(modelsummary)
 cm <- c('protesterviolence.lag1' = 'Protester Violence (T-1)',
         'protesterviolence' = 'Protester Violence (T)')

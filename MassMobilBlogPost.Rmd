@@ -1,0 +1,559 @@
+---
+title: "Anti-State Protests: A Statistical Analysis"
+author: "Hans Elliott"
+date: "November 22, 2021"
+output:
+  html_document:
+    theme: cosmo
+    includes:
+      after_body: footer.html
+
+---
+<style type="text/css">
+h1.title {
+font-weight: bold;
+}
+h1 { /* Header 1 */
+  color: #1a3365;
+}
+</style>
+![](https://raw.githubusercontent.com/hans-elliott99/mass-mobilization/main/protest.photo.JPG)
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+setwd("C:/Users/hanse/Desktop/EC523/ZMassMobilization")
+knitr::opts_chunk$set(echo=FALSE)    #hides all code in output
+
+library(pacman)
+p_load(tidyverse, stargazer, broom, sandwich, paletteer)
+# Load raw data from GitHub (for original source see bottom of document)
+MMdata <- 
+  read_csv("https://raw.githubusercontent.com/hans-elliott99/mass-mobilization/main/Data/mmALL_073120_csv.csv")
+  MMdata$id <- as.character(MMdata$id)    #for later use
+```
+##### Contents  
+[Analysis](#analysis)  
+[Conclusions](#discussion)  
+[Data & Code](#data)
+
+  Over the last few years, mass protests have dominated the world's attention, even amidst the COVID-19 pandemic. In 2019, mass pro-democracy mobilizations in Hong Kong received international coverage as protesters and police clashed in the streets. In 2020, the George Floyd protests against police brutality and Black Lives Matter protests rallied people across the world to speak out against oppression and for equality. Months later, rioters supporting former-President Trump stormed the U.S. capitol after the results of the presidential election. In Bulgaria, anti-corruption protests raged against Prime Minister Borisov. In Brazil, protesters condemned President Bolsonaro's mishandling of the pandemic. The [media and scholars alike](https://www.economist.com/graphic-detail/2020/03/10/political-protests-have-become-more-widespread-and-more-frequent) have identified these protests as part of an increasing trend in mass movements.
+  
+  
+  These kinds of anti-state mobilizations are the subject of an [extensive data collection project](https://massmobilization.github.io/about.html) led by political science professors David Clark and Patrick Regan. To better understand citizen movements against governments, their project contains protest-level data from 162 countries between 1990 and 2019, including over 15,000 individual protests. They focus on mass anti-state mobilizations — not inter-community disputes — and define a protest as any gathering of 50 or more people to demand something from the government.
+  
+  
+  Analyzing their data, I became particularly interested in protester violence. Many have debated the role of violence in protests. Malcolm X famously rejected the nonviolent emphasis of the U.S. civil rights movement because he felt it was an inadequate response to the extensive white violence against black Americans. Gandhi, often considered the embodiment of nonviolent resistance, [wrote](https://www.mkgandhi.org/mynonviolence/chap12.htm): 
+  
+> "We may never be strong enough to be entirely non-violent in thought, word and deed. But we must keep non-violence as our goal and make steady progress towards it." 
+  
+Using this data, I analyze violence in mass mobilizations and suggest some implications for protesters and state governments. 
+
+
+
+# Exploring the Data:
+
+### How have protests changed over time?
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE,results='hide'}
+### Yearly Protest Stats - create df and plots
+## create df
+MMbyYear <- MMdata %>% filter(protest == 1) %>% group_by(year) %>%
+  summarise(count = n(),
+            violent_count = sum(protesterviolence, na.rm = T),
+            rate_violence = violent_count/count)
+MMbyYear$nonviolent_count <- MMbyYear$count - MMbyYear$violent_count
+MMbyYear <- MMbyYear[MMbyYear$year != 2020,] 
+                  #removes year 2020. data collection incomplete in Fall 2021
+
+## plots
+# Number of protests each year
+PlotYear1 <- MMbyYear %>%
+  ggplot(aes(year, count)) + geom_point() + ylim(0,860)+ theme_minimal() +
+  geom_smooth(data = MMbyYear, method = lm, color = "gray30") +
+  geom_smooth(data = MMbyYear[MMbyYear$year>2008,],method = lm,
+              color="chartreuse4")+
+  scale_x_continuous(breaks = pretty(MMbyYear$year, n = 11)) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1,family = "serif")) +
+  theme(legend.key.size = unit(1,"line")) +
+  labs(x = "Year",y = "Number of Protests")
+    #calc linear model coefficients:
+lmP <- lm(count ~ year, data = MMbyYear) 
+MMbyYear1 <- MMbyYear
+  MMbyYear1 <- MMbyYear1 %>% mutate(count1=count) #manipulating for use in stargazer table
+lmP2 <- lm(count1~year,data = MMbyYear1[MMbyYear1$year>2008,])
+
+# Protest count by violent and nonviolent
+PlotYear2 <- ggplot() + theme_minimal() +
+  geom_point(data=MMbyYear, aes(year, nonviolent_count,color='Nonviolent')) +
+    geom_smooth(method = lm, data = MMbyYear, aes(year,nonviolent_count),
+                color='darkblue') +
+  geom_point(data=MMbyYear, aes(year, violent_count,color='Violent')) +
+    geom_smooth(method = lm, data = MMbyYear, aes(year,violent_count),
+                color='darkred') +
+    scale_color_manual(values = c('Nonviolent'="blue",'Violent'="red"))+
+    scale_x_continuous(breaks = pretty(MMbyYear$year, n = 11)) + 
+    theme(legend.key.size = unit(1,"line")) +
+    labs(x = "Year",y = "Number of Protests", color = "Protest") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1,family = "serif"))
+lmV <- lm(violent_count~year, data = MMbyYear) #violent linear reg
+lmNV <- lm(nonviolent_count~year, data = MMbyYear) #nonviolent linear reg
+
+# Rate of violent protests each year
+PlotYear3 <- MMbyYear %>%
+  ggplot(aes(year, rate_violence)) + geom_point() + theme_minimal() +
+  geom_smooth(method = lm, color = "purple") +
+  scale_x_continuous(breaks = pretty(MMbyYear$year, n = 11)) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1, family = "serif")) +
+  labs(x = "Year",y = "Violent Protests/Total Protests")
+lmV_Y <- lm(rate_violence ~ year, data = MMbyYear)
+
+```
+
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE,fig.width=10,fig.height=8,fig.align='center'}
+#grouped plot:
+p_load(cowplot)
+p <- cowplot::plot_grid(PlotYear1,PlotYear2,PlotYear3)
+theme_set(theme_cowplot(font_size=7, font_family = "Times"))
+plot_grid(p, ncol = 1, rel_heights = c(0.1,1))
+```
+
+  
+The table below shows regression results for the linear models in the figures above. Heteroskedasticity-consistent robust standard errors were calculated for all regressions in this section.
+
+```{r,echo=FALSE,results='asis'}
+## stargazer table for reg results
+#(calculate robust standard errors with 'sandwich' package)
+se_lmP  <- sqrt(diag(vcovHC(lmP)))
+se_lmP2  <- sqrt(diag(vcovHC(lmP2)))
+se_lmV  <- sqrt(diag(vcovHC(lmV)))
+se_lmNV <- sqrt(diag(vcovHC(lmNV)))
+se_lmV_Y <- sqrt(diag(vcovHC(lmV_Y)))
+#
+stargazer(lmP,lmP2,lmV,lmNV,lmV_Y,
+          se = list(se_lmP,se_lmP2,se_lmV,se_lmNV,se_lmV_Y),
+          keep.stat=c("n","rsq"), omit = "Constant",
+          model.numbers = F,
+          dep.var.labels=c("Frequency", "Frequency after 2008", 
+                           "Frequency of Violent","Frequency of Nonviolent","Proportion of Violent"), 
+          type = 'html', dep.var.caption = "Protests", 
+          title = "Table 1: Average Effects of Time on Protest Frequency per Year")
+```
+$~$
+  
+  On average, the annual frequency of protests has increased by just under 12 protests per year, while the frequency of violent protests has increased by just under 2 per year. Given the larger average yearly increase in nonviolent protests (about 10 per year), the proportion of violent protests per year has remained fairly constant. Notably, since 2009 the average yearly increase in protests has jumped to about 30 more protests per year, providing quantitative evidence for the perceived increase in mass mobilizations in recent years. Overall, the results suggest that while protests have become more common, they haven't become significantly more violent.
+
+$~$
+
+### Protests across the world
+```{r,echo=FALSE, warning=FALSE,message=FALSE,results='hide'}
+### Country Summary Stats
+## Create df
+MMbyCountry <- MMdata %>% filter(protest == 1 & year != 2020) %>% 
+  group_by(country) %>%
+  summarise(count = n(),
+            violent_count = sum(protesterviolence, na.rm = T),
+            nonviolent_count = count - violent_count,
+            rate_violence = violent_count/count,
+            region = region)
+MMbyCountry <- unique(MMbyCountry[,1:6])
+
+# Creating a world map:
+p_load(rworldmap) #paletteer for custom color palette
+MapTest <- joinCountryData2Map(MMbyCountry, joinCode = "NAME", 
+                                  nameJoinColumn = "country", verbose = T)
+#Shows we have to rename 11 countries so they match rworldmap package country names:
+MMbyCountry <- MMbyCountry %>% mutate(
+  country=ifelse(country=="Bosnia","Bosnia and Herzegovina",country),
+  country=ifelse(country=="Congo Brazzaville","Congo (Brazzaville)",country),
+  country=ifelse(country=="Congo Kinshasa","Congo (Kinshasa)",country),
+  country=ifelse(country=="Germany East","Germany",country),
+  country=ifelse(country=="Germany West","Germany",country),
+  country=ifelse(country=="Germany West","Germany",country),
+  country=ifelse(country=="Serbia and Montenegro","Serbia",country),
+  country=ifelse(country=="Timor Leste","East Timor",country),
+  country=ifelse(country=="United Arab Emirate","United Arab Emirates",country),
+  country=ifelse(country=="USSR","Russia",country),
+  country=ifelse(country=="Yugoslavia","Serbia",country),
+  country=ifelse(country=="Czechoslovakia","Czech Republic",country),
+)
+# need to sum  counts now that there are multiple of germany, serbia, & russia:
+MMbyCountry <- MMbyCountry %>% group_by(country) %>% summarise(
+  count = sum(count),
+  violent_count = sum(violent_count),
+  nonviolent_count = sum(nonviolent_count),
+  rate_violence = violent_count/count,
+  region = region
+)
+  MMbyCountry <- unique(MMbyCountry[,1:6])#delete repated country names
+
+  # Number of Protests per Country
+protestMap <- joinCountryData2Map(MMbyCountry, joinCode = "NAME", 
+                                 nameJoinColumn = "country", verbose = T)
+```
+
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,fig.align='center'}
+mapParams <- mapCountryData(protestMap, nameColumnToPlot="count",
+               missingCountryCol = gray(.8), 
+               catMethod=c(1,50,100,150,200,250,300,350,400,450,500,550,600),
+               colourPalette = 
+                 paletteer_c(`"grDevices::Purple-Yellow"`,n=12,direction=-1),
+               oceanCol = 'lightblue',
+               addLegend = F,
+               mapTitle = "Number of Protests per Country from 1990 to 2019")
+do.call(addMapLegend, c(mapParams, legendWidth=0.5, legendMar = 5))
+```
+```{r, echo=FALSE, warning=FALSE,message=FALSE, fig.align='center'}
+mapParams2 <- mapCountryData(protestMap, nameColumnToPlot="rate_violence",
+                  missingCountryCol = gray(.8), 
+                  colourPalette = 
+                   paletteer_c(`"ggthemes::Red-Gold"`,n=7),
+                  oceanCol = 'lightblue',
+         mapTitle = "Proportion of Violent Protests per Country from 1990 to 2019", 
+addLegend = F)
+do.call(addMapLegend, c(mapParams2, legendWidth=0.5, legendMar = 5))
+```
+  The first map shows the total number of protests per country in this period. Europe has the highest number of recorded protests, with the United Kingdom, France, Ireland, and Germany holding the top four spots. Outside of Europe, Kenya and Bangladesh have the fifth and sixth most protests. This data set does not include protests for the United States, among a few other countries. 
+  
+  
+  The second map shows which countries had a higher proportion of violent protests compared to nonviolent. Many countries in Africa and Asia tended to have a higher proportion of violent protests. It is important to note that the quantity of protests reported in the data varies greatly by country. For example, the highest proportion of violent protests occurred in the United Arab Emirates, where there are only 3 protests included, 2 of which were violent. The second highest proportion is in Gabon, where 23 out of 35 protests were violent, and third was in Guinea, where 65 out of 100 protests were violent.
+
+
+  The diverse political, social, and cultural contexts of the countries included above must be acknowledged. There are many factors related to these systems that might influence citizens to mobilize against their government, contribute to whether they use violence, and shape the response of the state. While acknowledging these unique contexts, in the following section I take advantage of the sheer quantity of protests included in the data to offer some analysis on the dynamics of violent protests.
+  
+$~$
+  
+<a name="analysis"></a>  
+
+# Estimating Relationships between Violent Protests and State Responses 
+  To analyze protest trends, I mainly utilize two variables included in the data. The first is **protester violence**, a binary variable coded for whether the given protest included violent actions from the protesters. Violent actions include anything from destruction of property to shooting at the police or military. The second is **state response**, which classifies the government's response to each protest as one of seven categories, described further below.
+
+### DOES PAST PROTESTER VIOLENCE MAKE FUTURE VIOLENCE MORE LIKELY?
+```{r, results='hide',echo=FALSE}
+# Cleaning for analysis:
+### Isolate to Protest = True and drop year 2020 - incomplete data collection
+MMprotests <- MMdata %>% filter(protest == 1 & year != 2020)
+#For the sake of lagging variables within a given year and country:
+  # create protest id for each country and year
+  # these are our groups: protests given a country and year
+MMprotests$id.year <- MMprotests$id
+MMprotests$id.year = substr(MMprotests$id.year,1,nchar(MMprotests$id.year)-3)
+                      #drops last 2 digits from each id
+
+# State response variable:
+  sum(is.na(MMprotests$stateresponse1))
+mmNA<-  MMprotests[is.na(MMprotests$stateresponse1),]
+# Only 31 rows where state response was not reported, so I will drop. 
+# All other state response columns are mostly incomplete (NA). Focus on stateresponse1. 
+# NAs appear randomly distributed & very small fraction of sample. Drop NAs.
+MMprotests <- MMprotests[!is.na(MMprotests$stateresponse1),]
+```
+
+
+I start my analysis by seeking to answer a simple question: were anti-state protests more likely to be violent if there had already been a violent protest that year? This first requires classifying the protests into blocks by country and year, so that each block of protests occurred in the same country during the same year. Not every given "country-year" block has multiple protests, but the following histogram shows that a significant number of them have at least 2. 
+```{r, fig.align='center',fig.width=4,fig.height=4}
+MMprotests %>%
+  ggplot(aes(x = protestnumber)) + theme_bw()+
+  geom_histogram(binwidth = 1,fill="#996666",) +
+  xlab("Number of Protests in a Given Country and Year") + ylab("Frequency")
+```
+The bins in this histogram each account for a single protest number, where bin 1 is the frequency of 1st protests in a country-year, bin 2 is the frequency of 2nd protests in a country-year, and so on. With this in mind, let's examine the effect of 2 lags:
+
+
+* $ProtesterViolence_{T} =  \alpha +  \beta (ProtesterViolence_{T-1}) + \gamma(ProtesterViolence_{T-2}) +  \epsilon$  
+
+where $\alpha =$ No Prior Violence (the likelihood of violence when neither independent variable is true).  
+
+
+This is a linear probability model because the dependent variable — protester violence — is binary. Each coefficient is interpreted as the change in the probability that a protest is violent given that the independent variable is true (i.e., that the protest in that period was violent), and the predicted values are the predicted probabilities that a protest is violent given the independent variables.   
+Again, heteroskedasticity-consistent robust standard errors are calculated for all regressions in this section.
+```{r,results='hide'}
+## Creating 2 Lag Variables:
+MMprotests <- MMprotests %>% group_by(id.year) %>%
+  mutate(protesterviolence.lag1 = lag(protesterviolence, n=1, default = NA))
+sum(is.na(MMprotests$protesterviolence.lag1))
+#2920 NAs
+
+MMprotests <- MMprotests %>% group_by(id.year) %>%
+  mutate(protesterviolence.lag2 = lag(protesterviolence, n=2, default = NA))
+sum(is.na(MMprotests$protesterviolence.lag2))
+#5039 NAs
+
+## Recoding NAs
+# I want to include the NAs in reg to control for effect of there not being a 
+# past protest in the country-year group
+MMprotests$protesterviolence.lag1 <- MMprotests$protesterviolence.lag1 %>% #prior: replace_na('none')
+  replace_na(0)
+MMprotests$protesterviolence.lag2 <- MMprotests$protesterviolence.lag2 %>%
+  replace_na(0)
+# Turn protesterviolence lag variables into factors
+#MMprotests <- MMprotests %>% 
+#  mutate(protesterviolence.lag1 = factor(protesterviolence.lag1, levels = c(
+#    "none",1,0)),
+#    protesterviolence.lag2 = factor(protesterviolence.lag2, levels = c(
+#      "none",1,0)))
+
+## Regress protester violence on lags.
+pv_lag <- lm(protesterviolence ~ protesterviolence.lag1 + protesterviolence.lag2,
+             data = MMprotests)
+se_pv_lag  <- sqrt(diag(vcovHC(pv_lag)))
+```
+```{r, results='asis'}
+#Table updated after simplifying regression (Hans: see original file for original code)
+stargazer(pv_lag,se = list(se_pv_lag),
+          type = "html",
+          covariate.labels = c("Protester Violence in Period T-1",
+                             "Protester Violence in Period T-2",
+                              "Constant"),
+          dep.var.labels = "Protester Violence in Period T", 
+          keep.stat = c("n","rsq"),
+          dep.var.caption = "",
+          title = 
+            "Table 2: Effect of Past Protest Violence on Future Protest Violence",
+          column.sep.width = "-15pt", font.size = "small")
+```
+$~$
+
+The constant in this regression shows the likelihood of protester violence in period T when there were no prior violent protests. Nonviolence in periods T-1 and T-2 could be due to one of two events: 1) there were only nonviolent protests in prior periods; and 2) there were no protests at all in prior periods. In these cases, the likelihood of violence was 20.2% on average. If there was a violent protest in the previous period (T-1), protester violence in the current period was an additional 20.8% more likely, and if there was a violent protest 2 periods ago (T-2), the likelihood of protester violence was an additional 11.9% more likely. This indicates a compounding effect of protester violence, where past violence makes future violence more likely.
+
+
+
+### DOES STATE RESPONSE INFLUENCE PROTESTER VIOLENCE?
+
+
+States can respond to mass mobilizations in a variety of ways, whether they choose to ignore the protesters, accommodate their demands, or turn to more forceful methods. For the sake of maintaining peace and order, a state government might like to know how best to respond to an anti-state protest. The researchers have classified the state response to each mass mobilization as one of the seven categories seen in the figure below.
+```{r,fig.align='center'}
+MMresponse <- MMprotests %>% 
+  group_by(stateresponse1) %>%
+  summarise(count = n(),
+            violent_count = sum(protesterviolence, na.rm = T),
+            nonviolent_count = count - violent_count,
+            rate_violence = violent_count/count)
+MMresponse %>%
+  gather(type, number, violent_count:nonviolent_count) %>% 
+  ggplot(., aes(x=stateresponse1, y=number, fill=forcats::fct_rev(type))) +
+  geom_bar(stat="identity",position = "dodge") +
+  scale_fill_manual(values=paletteer::paletteer_d(`"basetheme::void"`,n=2,direction=-1),
+                    name = "Protest", labels=c("Violent","Nonviolent")) +
+  labs(title = "Frequency of State Response Type",x="",y="Frequency")+
+    theme(axis.text.x = element_text(angle = 33, vjust = 1, hjust=1)) + theme_minimal()
+```
+The ignore response, where states did not react to the protest action, was by far the most common, and tended to be associated with nonviolent protests. This was followed by the crowd dispersal response, where mechanisms like tear gas and warnings were used to break up the protest, but state actions were short of the more violent responses described by beatings, shootings, and killings. The actual accommodation of protester demands — where the state agreed to demands or negotiated with protesters — was relatively uncommon, especially when protests were violent.  
+
+The following regression estimates the likelihood of protester violence given the type of response that the state chooses to enforce:
+
+
+* $ProtesterViolence_T =  \alpha +  \beta (StateResponse_T) +  \epsilon$  
+
+where $\alpha =$ baseline and is the likelihood of the state response being accommodation of protester demands.
+
+```{r,echo=FALSE,results='asis'}
+MMprotests <- MMprotests %>% 
+  mutate(stateresponse1 = factor(stateresponse1, levels = c(
+    "accomodation","ignore","crowd dispersal", "arrests",
+    "beatings", "shootings", "killings"
+  )))
+m1 <- lm(protesterviolence ~ stateresponse1, data = MMprotests)
+se_m1  <- sqrt(diag(vcovHC(m1)))
+
+stargazer(m1, se = list(se_m1),
+          type = "html", keep.stat = c("n","rsq"),
+          dep.var.labels = "Probability that Protesters are Violent",
+          covariate.labels = c("Ignore","Crowd Dispersal",
+                               "Arrests","Beatings","Shootings","Killings",
+                               "(Constant) Accommodation"),
+          dep.var.caption = "",
+          title = "Table 3: Effect of State Response on Protester Violence")
+```
+  
+$~$
+  
+The constant in this regression is a state response of accommodation, where the likelihood of protester violence is 12.8% on average. The likelihood of violence for other responses are shown in comparison to the constant, so that a state response of killing has the highest likelihood of violence (69.4%) and a state response of ignoring protesters has the lowest likelihood of violence (6.9%).  
+This seems logical. Instances where states respond violently to mass mobilizations - resorting to beating, shooting, or killing - are also when protesters are most likely to resort to violence. The results also show that when states ignored protests, protesters were the least likely to be violent. This could be showing that states simply do not feel pressured to respond to nonviolent protests — as seen in the graph above, the ignore response was primarily used in nonviolent instances. However, since we don't know at what point in the protest the state response occurs, this result could also be evidence that a state's most effective option to reduce violence is to simply ignore the protest. Perhaps some of these protests would have turned violent if the state had chosen a different response. These are ideas I will attempt to address in the next section.
+  Finally, the results suggest that using crowd dispersal mechanisms — a common response to mass protests seen in recent years — is likely to accompany protester violence. This could be a sign that states should avoid this response. On the other hand, it is likely that these mechanisms are commonly deployed to suppress crowds when protesters have already resorted to violence.
+  
+
+  In the above regression, we cannot say that any state responses directly caused the likelihood of protester violence to increase or decrease, just that some responses were correlated with higher probabilities of violence while some were correlated with lower probabilities. Among other reasons, this is because we do not know when protesters resort to violence — it could be before or after the state's chosen response. 
+To attempt to get some more answers, I utilize a lag variable. It seems possible that, when there are multiple protests in a given country and year, protesters decide to take violent actions based on how the state they are mobilizing against last responded to a mass mobilization. In other words, does state response to the last mobilization (in period T-1) influence the likelihood of protester violence in the present mobilization (period T)? The following regression estimates this effect:
+
+
+* $ProtesterViolence_{T} =  \alpha +  \beta (StateResponse_{T-1} ) +  \epsilon$
+
+where $\alpha =$ the baseline of no prior protests (the likelihood of violence if it's the first protest in a given country and year).
+```{r,echo=FALSE,results='asis'}
+MMprotests <- MMprotests %>% group_by(id.year) %>%
+  mutate(stateresponse.lag1 = lag(stateresponse1, n=1, default = "none"))
+
+MMprotests <- MMprotests %>% 
+  mutate(stateresponse.lag1 = factor(stateresponse.lag1, levels = c(
+    "none","accomodation","ignore","crowd dispersal", "arrests",
+    "beatings", "shootings", "killings"
+  )))
+
+lag_sr1 <- lm(protesterviolence ~ stateresponse.lag1, data = MMprotests)
+se_lag_sr1  <- sqrt(diag(vcovHC(lag_sr1)))
+stargazer(lag_sr1, se = list(se_lag_sr1),
+          type = "html", keep.stat = c("n","rsq"),
+          dep.var.labels = "Probability that Protesters are Violent",
+          dep.var.caption = "(Period T)",
+          covariate.labels = c("Accommodation(T-1)","Ignore(T-1)",
+                               "Crowd Dispersal(T-1)",
+                               "Arrests(T-1)","Beatings(T-1)","Shootings(T-1)",
+                               "Killings(T-1)", "(Constant) No Prior Protest"),
+          title = "Table 4: Effect of Last State Response on Protester Violence")
+```
+  
+  $~$
+  
+  While the likelihood of violence in the next period was low when the state accommodated protester demands, protesters were least likely to resort to violence in period T if the state responded to the last protest (period T-1) by ignoring the protesters. This supports that states can reduce violence by ignoring mass movements. This might be bad news for protesters who hope to engage with their government to enact change, but the ignore response also allows protesters to assemble peacefully and to have their say uninterrupted, which is likely a valuable opportunity for any mass mobilization.  
+ Meanwhile, crowd dispersal mechanisms and more violent state actions — beatings, shootings, and killings — were correlated with an increased likelihood of future protester violence, indicating that state violence contributes to increased protester violence.
+
+
+### DOES VIOLENCE IN THE LAST PROTEST INFLUENCE THE LIKELIHOOD OF A STATE RESPONSE?
+
+
+  We've seen that a state's response to a protest can increase or decrease the likelihood that the next protest is violent. It would also be interesting to know if protester violence in the last anti-state mobilization contributes to the state's response to the next protest. Do violent actions from protesters increase the likelihood that states utilize more forceful methods against the next protest? Do they decrease the likelihood of accommodation?  
+I estimate these effects by regressing the state response in the current period (period T) on protester violence in the last period (period T-1), while also controlling for the effect of protester violence in the current period (period T):  
+
+
+* $StateResponse_{T} =  \alpha +  \beta (ProtesterViolence_{T-1})+ \gamma(ProtesterViolence_{T}) +  \epsilon$  
+
+where $\alpha =$ the baseline which is the likelihood of the state response when neither independent variable is true (only nonviolence in previous periods).  
+
+I repeat this regression 7 total times for each type of state response.
+```{r,echo=FALSE, results='hide'}
+MMprotests <- MMprotests %>% mutate(
+  state_accom = ifelse(stateresponse1=="accomodation",1,0),
+  state_ignore = ifelse(stateresponse1=="ignore",1,0),
+  state_crowd.disp = ifelse(stateresponse1=="crowd dispersal",1,0),
+  state_arrests = ifelse(stateresponse1=="arrests",1,0),
+  state_beat = ifelse(stateresponse1=="beatings",1,0),
+  state_shoot = ifelse(stateresponse1=="shootings",1,0),
+  state_kill = ifelse(stateresponse1=="killings",1,0)
+)
+p.s_accom <- lm(state_accom~protesterviolence + protesterviolence.lag1,
+                data = MMprotests)
+  se_accom  <- sqrt(diag(vcovHC(p.s_accom)))
+p.s_ignore <- lm(state_ignore~protesterviolence + protesterviolence.lag1,
+               data = MMprotests)
+  se_ignore  <- sqrt(diag(vcovHC(p.s_ignore)))
+p.s_crowd <- lm(state_crowd.disp~protesterviolence + protesterviolence.lag1,
+                   data = MMprotests)
+  se_crowd  <- sqrt(diag(vcovHC(p.s_crowd)))
+p.s_arrests <- lm(state_arrests~protesterviolence + protesterviolence.lag1,
+                  data = MMprotests)
+  se_arrests  <- sqrt(diag(vcovHC(p.s_arrests)))
+p.s_beat <- lm(state_beat~protesterviolence + protesterviolence.lag1,
+                    data = MMprotests)
+  se_beat  <- sqrt(diag(vcovHC(p.s_beat)))
+p.s_shoot <- lm(state_shoot~protesterviolence + protesterviolence.lag1,
+                 data = MMprotests)
+  se_shoot  <- sqrt(diag(vcovHC(p.s_shoot)))
+p.s_kill <- lm(state_kill~protesterviolence + protesterviolence.lag1,
+                  data = MMprotests)
+  se_kill  <- sqrt(diag(vcovHC(p.s_kill)))
+```
+
+```{css, echo=FALSE}
+table, td, th {
+  padding-left: 1em;
+}
+```
+```{r,echo=FALSE,results='asis'}
+stargazer(p.s_accom,p.s_ignore,p.s_crowd,p.s_arrests,p.s_beat,p.s_shoot,p.s_kill,
+          se=list(se_accom,se_ignore,se_crowd,se_arrests,se_beat,se_shoot,se_kill),
+          type = "html", order =
+            c("protesterviolence.lag1","protesterviolence","Constant"), 
+          keep.stat = c("n","rsq"),
+          covariate.labels = c("Violent Protest(T-1)",
+          "Violent Protest(T)", "Constant"),
+          dep.var.caption = "7 Models: State Response in Period T",
+          dep.var.labels = c("Accommodate","Ignore",
+                             "Crowd Dispersal","Arrests",
+                             "Beatings","Shootings","Killings"),
+          title = "Table 5: Effect of Protester Violence on Future State Response",
+          column.sep.width = "5pt", out.header = T)
+```
+
+$~$
+
+Again, coefficients are to be interpreted relative to the constant, which is the mean likelihood of violence when all independent variables (protester violence in previous periods) are 0 (i.e., nonviolent). On average, when protesters were violent in the last protest, the likelihood of accommodation was 0.4% lower for the next protest, although this estimate is not statistically significant from zero. Violence in the last period made the likelihood of the state ignoring the protest 4.8% lower on average, and made crowd dispersal mechanisms 4.8% more likely on average. These effects were statistically significant and the robust standard errors indicate some precision. For each of the other models, the predicted effect of violence in the last protest on the likelihoods of arrests, beatings, shootings, and killings, respectively, was not statistically significant from zero.
+These results suggest that violent protests reduce the likelihood that states will ignore the next protest, but that violence in the last protest does not necessarily predict what response the state will take to the next protest when they choose not to ignore (although crowd dispersal has the highest probability). This indicates that states tend to react harsher to the current protest when the last protest was violent.
+Overall, the magnitudes of the coefficients on the protester violence lag are much smaller than those of the current period coefficients, indicating that protester violence in the current period was a stronger predictor of the chosen state response than protester violence in the last period. Protester violence in the current period had statistically significant effects in all of the models. Notably, protester violence tends to decrease the likelihood of the accommodation and ignore response, while increasing the likelihood of all of the other, more forceful responses.
+
+
+As a final measure, I want to consider the immense variation in the protests being evaluated here. It is a big stretch to assume that the given country a protest occurs in does not influence protester violence or state response. There are naturally a variety of factors that contribute to these moments, including the unique social and political contexts of a country in a given time. Further, we have seen that the yearly frequency of protests has increased quickly over the past decade. The graph below shows that states have disproportionately responded to this onslaught of protests by either ignoring them or using crowd dispersal mechanisms. Accommodation, arrests, or shootings, beating, and killings have remained relatively uncommon responses in comparison.
+```{r, warning=FALSE,message=FALSE,fig.align='center'}
+mmYearResp <- MMprotests %>% group_by(year) %>% summarise(
+  count_accom = sum(state_accom),
+  count_ignore = sum(state_ignore),
+  count_crowd = sum(state_crowd.disp),
+  count_arrests = sum(state_arrests),
+  count_shoot = sum(state_shoot),
+  count_beat = sum(state_beat),
+  count_kill = sum(state_kill),
+  count_sbk = count_shoot+count_beat+count_kill
+)
+
+mmYearResp %>% ggplot() + theme_minimal() +
+  geom_line(aes(x = year, y = count_accom, color = "Accommodation")) +
+  geom_line(aes(x = year, y = count_ignore, color = "Ignore")) +
+  geom_line(aes(x = year, y = count_crowd, color = "Crowd Dispersal")) +
+  geom_line(aes(x = year, y = count_arrests, color="Arrests")) +
+  geom_line(aes(x = year, y = count_sbk,color="Shootings,Beatings,Killings")) +
+  scale_color_manual(name = "State Response",values = c("blue","darkgreen","purple",
+                                                        "red","coral4")) +
+  labs(title = "State Responses over Time", y = "Frequency", x = "Year")
+  
+```
+ As a final measure, I control for the effects of time and country on the likelihood of a state response when a protest is violent. I focus on the ignore and crowd dispersal responses, because they were most frequent and changed the most over time. Here I use protester violence in the last period as a sort of treatment to determine the likelihood of the state responses while using year and group (country) fixed effects. The fixed effects absorb the impact of time and being in a given country on the likelihood of the given state response so that any changes in the dependent variable (the likelihood of the state response) must be due to influences other than the fixed characteristics. 
+
+```{r,warning=FALSE,message=FALSE,results='asis',fig.align='left'}
+p_load(fixest)
+mod <- list()
+mod[['Ignore']] <- feols(state_ignore ~ protesterviolence.lag1 + protesterviolence | country + year,
+      data=MMprotests,cluster="country")
+mod[['Crowd Dispersal']] <- feols(
+  state_crowd.disp ~ protesterviolence.lag1 + protesterviolence | country + year,
+      data=MMprotests,cluster="country")
+
+p_load(modelsummary)
+cm <- c('protesterviolence.lag1' = 'Protester Violence (T-1)',
+        'protesterviolence' = 'Protester Violence (T)')
+modelsummary(mod, statistic = c("s.e. = {std.error}",
+                                "p = {p.value}"), stars = T,
+             gof_omit = 'DF|Deviance|AIC|BIC|Log.Lik|Std.Errors|
+             R2 Adj.|R2 Within|R2 Pseudo',
+             title = "Table 6: Regressions with Fixed Effects",
+             coef_map = cm)
+```
+
+Even when controlling for fixed effects, protester violence in the last period is correlated with the state being less likely to ignore the next protest, while also correlated with the state being more likely to respond with crowd dispersal mechanisms to the next protest. Again, this effect was stronger when considering protester violence in the current period. These results strengthen the argument that protester violence can cause the state to respond harsher to the next protest. 
+
+<a name="discussion"></a>  
+
+# Conclusions 
+
+
+  The regressions in Table 3 show that if protesters are violent, the state tends to respond with force (not to ignore or accommodate protesters). This seems logical, since it could be argued that many states assume the duty of protecting the life and property of all their people, or at the least are motivated by maintaining power. If protesters take violent actions that lead to the destruction of property or threaten lives, the state becomes obligated to react. However, when states choose to respond with force to protests, it increases the likelihood of violence in future protests (Table 4). Further, since protester violence in the last mobilization is correlated with a higher likelihood of protester violence in the next mobilization (Table 2), future protests are also likely to be violent, indicating that the compounding effect of violence can be worsened by the state response. Finally, the regressions in Tables 5 & 6 show that states tend to respond more harshly to a protest if the last one was violent.
+
+  This creates somewhat of a dilemma for state governments. In scenarios where protests are violent, they could reduce the likelihood of future violence by ignoring the protesters, which would also help to avoid the compounding effects of violence. Yet this might require going against their obligations and incentives as a governing power, whether those be to prevent destruction of life and property or to prevent unrest that could destabilize political control. The results show that if protesters were violent in the last protest, states were less likely to ignore the next protest. Ultimately this means that violent protests tended to trigger a series of further violent actions from both the state and protesters.
+  
+  
+   Using data of this scale — over such a time period and from all across the world — certainly has its limitations. There are likely many confounding variables due to the extremely diverse social and political systems — variables that would influence the likelihood of protester violence as well as the type of state response. Perhaps with data more suitable to this analysis, researchers can offer evidence as to how state’s should best respond to violent protests in order to reduce overall harm, or how protesters can take advantage of mass mobilizations to increase their likelihood of creating lasting social change. Economists might even be able to evaluate the economic impacts of protester violence and related state responses. In addition, recent protester mobilizations in the U.S. have shown that different movements often consist of different demographics. Further research should explore the differential dynamics of state responses and protester violence when considering race and sex of protesters. 
+   
+   
+   The frequency of mass movements appears to be increasing with time, and the total quantity of violent protests with it. Whether or not violence is ever justified in a protest is a philosophical matter. What this analysis offers is evidence that violence from protesters and states alike can have rippling effects that lead to more violence. This has a variety of implications for state governments and mass movements.
+
+
+![](https://raw.githubusercontent.com/hans-elliott99/mass-mobilization/main/protest.photo2.JPG)
+
+<a name="data"></a>  
+
+#### Data: 
+Clark, David; Regan, Patrick, 2016, "Mass Mobilization Protest Data", https://doi.org/10.7910/DVN/HTTWYL,   Harvard Dataverse, V5, UNF:6:F/k8KUqKpCa5UssBbL/gzg== [fileUNF]
+
+
+This blog post is fully reproducible using R and R Markdown. Code available here:
+  
+  
+  

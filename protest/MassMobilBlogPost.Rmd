@@ -553,7 +553,7 @@ Even when controlling for fixed effects, protester violence in the last period i
 Clark, David; Regan, Patrick, 2016, "Mass Mobilization Protest Data", https://doi.org/10.7910/DVN/HTTWYL,   Harvard Dataverse, V5, UNF:6:F/k8KUqKpCa5UssBbL/gzg== [fileUNF]
 
 
-This blog post is fully reproducible using R and R Markdown. Code available here:
+This blog post is fully reproducible using R and R Markdown. Code available here: https://github.com/hans-elliott99/hans-elliott99.github.io/tree/main/protest
   
   
   

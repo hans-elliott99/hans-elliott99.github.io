@@ -1,5 +1,3 @@
-<link href="index.css" rel="stylesheet"></link>
-
 ## Welcome
 I am a graduate student studying economics, interested in quantitative social science and data analysis, among other things.  
 

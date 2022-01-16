@@ -20,6 +20,3 @@ nav:
    link: "/home/"
  - name: "Résumé"
    link: "Resume.html"
- - name: "Contact"
-   link: "contact.md"
-

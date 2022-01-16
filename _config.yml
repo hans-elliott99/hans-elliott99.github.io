@@ -1,3 +1,4 @@
-theme: jekyll-theme-minimal
 title: Hans Elliott
-description: Autodidact
+logo: me.jpg
+google_analytics:
+remote_theme: ankitsultana/researcher@gem

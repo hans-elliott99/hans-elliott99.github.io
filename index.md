@@ -1,5 +1,3 @@
-<img src="me.jpg" alt="me" width="200"/>
-
 ## Welcome
 I am a graduate student studying economics, interested in quantitative social science and data analysis, among other things.  
 
@@ -20,6 +18,8 @@ Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Develo
 [C(art)ograhpy](https://hans-elliott99.github.io/C-art-ography.html)  
 
 #### Undergraduate Thesis
+Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarization and the Evolving Role of the Community College  
+
 An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
 [View PDF here.](https://hans-elliott99.github.io/HansElliott_Thesis.pdf)  
 

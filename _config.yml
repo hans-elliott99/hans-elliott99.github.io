@@ -1,8 +1,2 @@
 title: Hans Elliott
-remote_theme: ankitsultana/researcher@gem
-
-nav:
- - name: "Home"
-   link: "/home/"
- - name: "Résumé"
-   link: "Resume.html"
+remote_theme: TaylanTatli/Moon

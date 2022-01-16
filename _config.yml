@@ -3,7 +3,7 @@ url: "https://hans-elliott99.github.io/"
 baseurl: "/home"
 
 markdown: kramdown
-#ins_logo: "./bits-logo.png"
+ins_logo: "./me.jpg"
 
 tracking_id: #
 

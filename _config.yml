@@ -1,9 +1,22 @@
 title: Hans Elliott
-logo: me.jpg
-google_analytics:
-remote_theme: ankitsultana/researcher@gem
+url: "https://hans-elliott99.github.io/"
+baseurl: "/home"
+
+markdown: kramdown
+#ins_logo: "./bits-logo.png"
+
+tracking_id: #
+
+footer: yes
+footer_url: "https://github.com/hans-elliott99"
+footer_text: ""
+
+sass:
+    style: compressed
+    sass_dir: _sass
+
 nav:
  - name: "Home"
-   link: "/"
+   link: "/home/"
  - name: "Resume"
    link: "Resume.html"

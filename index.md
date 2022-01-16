@@ -1,5 +1,3 @@
-<img src="me.jpg" alt="me" width="200"/>
-
 ## Welcome
 I am a graduate student studying economics, interested in quantitative social science and data analysis, among other things.  
 

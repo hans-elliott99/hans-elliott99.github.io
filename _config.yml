@@ -16,6 +16,6 @@ sass:
 
 #nav:
 # - name: "Home"
-#   link: "/home/"
+#   link: ""
 # - name: "Résumé"
 #   link: "Resume.html"

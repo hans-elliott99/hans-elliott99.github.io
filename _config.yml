@@ -1,21 +1,5 @@
 title: Hans Elliott
 remote_theme: ankitsultana/researcher@gem
-url: "https://hans-elliott99.github.io"
-baseurl: "/home"
-
-
-markdown: kramdown
-ins_logo: "./me.jpg"
-
-tracking_id: #
-
-footer: yes
-footer_url: "https://github.com/hans-elliott99"
-footer_text: ""
-
-sass:
-    style: compressed
-    sass_dir: _sass
 
 nav:
  - name: "Home"

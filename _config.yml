@@ -1,6 +1,5 @@
----
-theme: jekyll-theme-minimal
 title: Hans Elliott
 logo: me.jpg
 description: Autodidact
----
+google_analytics:
+theme: jekyll-theme-minimal

@@ -18,5 +18,8 @@ sass:
 nav:
  - name: "Home"
    link: "/home/"
- - name: "Resume"
+ - name: "Résumé"
    link: "Resume.html"
+ - name: "Contact"
+   link: "contact"
+

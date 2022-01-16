@@ -1,10 +1,8 @@
 ## Welcome
 I am a graduate student studying economics, interested in quantitative social science and data analysis, among other things.  
 
-<center>
 [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  
 [Résumé](https://hans-elliott99.github.io/Resume.html)
-</center>
 
 # Recent Projects
 #### Mass Mobilization Data Analysis (Causal Inference)
@@ -12,8 +10,7 @@ Did you know that when state governments choose to respond with force to protest
 [Read my project about anti-state mobilizations here.](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html)  
 
 #### Machine Learning
-Currently learning statistical learning methods. Recent project completed on Kaggle:
-https://www.kaggle.com/hanselliott/
+Currently learning statistical learning methods. Recent project completed on [Kaggle.](https://www.kaggle.com/hanselliott/)
 
 #### Sustainable Development
 Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation. [Link.](https://hans-elliott99.github.io/ASI_Elliott.pdf)

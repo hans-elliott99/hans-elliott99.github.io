@@ -1,13 +1,19 @@
 ## Welcome
 I am a graduate student studying economics, interested in quantitative social science and data analysis, among other things.  
 
+<center>
 [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  
 [Résumé](https://hans-elliott99.github.io/Resume.html)
+</center>
 
 # Recent Projects
 #### Mass Mobilization Data Analysis (Causal Inference)
 Did you know that when state governments choose to respond with force to protests, they increase the likelihood that future protesters use violence?
-[Read my "blog post" about anti-state mobilizations here.](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html)  
+[Read my project about anti-state mobilizations here.](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html)  
+
+#### Machine Learning
+Currently learning statistical learning methods. Recent project completed on Kaggle:
+https://www.kaggle.com/hanselliott/
 
 #### Sustainable Development
 Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation. [Link.](https://hans-elliott99.github.io/ASI_Elliott.pdf)
@@ -27,5 +33,5 @@ An undergraduate economics thesis about the Oregon labor market and community co
 [Consumer Spending Forecast](https://hans-elliott99.github.io/EconomicForecasting.pdf)
 
 
-### Contact Me
+### Contact
 hanselliott61 @ gmail.com

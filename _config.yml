@@ -1,5 +1,7 @@
 title: Hans Elliott
 url: "https://hans-elliott99.github.io"
+baseurl: "/home"
+
 
 markdown: kramdown
 ins_logo: "./me.jpg"
@@ -16,6 +18,6 @@ sass:
 
 nav:
  - name: "Home"
-   link: ""
+   link: "/home/"
  - name: "Résumé"
    link: "Resume.html"

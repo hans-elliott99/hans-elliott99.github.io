@@ -2,3 +2,8 @@ title: Hans Elliott
 logo: me.jpg
 google_analytics:
 remote_theme: ankitsultana/researcher@gem
+nav:
+ - name: "Home"
+   link: "/"
+ - name: "Resume"
+   link: "Resume.html"

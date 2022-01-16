@@ -14,8 +14,8 @@ sass:
     style: compressed
     sass_dir: _sass
 
-#nav:
-# - name: "Home"
-#   link: ""
-# - name: "Résumé"
-#   link: "Resume.html"
+nav:
+ - name: "Home"
+   link: ""
+ - name: "Résumé"
+   link: "Resume.html"

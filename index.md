@@ -32,3 +32,7 @@ An undergraduate economics thesis about the Oregon labor market and community co
 
 ### Contact
 hanselliott61 @ gmail.com
+
+<font size="0.5">
+[A faster way for Hans to check the surf report.](https://hans-elliott99.github.io/SurfReport.html)
+</font>

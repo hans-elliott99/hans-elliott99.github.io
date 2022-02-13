@@ -1,5 +1,5 @@
 ## Welcome
-I am a graduate student studying economics, interested in quantitative social science and data analysis, among other things.  
+I am a graduate student studying economics, interested in applied micro and econometrics, among other things.  
 
 [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  
 [Résumé](https://hans-elliott99.github.io/Resume.html)
@@ -33,6 +33,8 @@ An undergraduate economics thesis about the Oregon labor market and community co
 ### Contact
 hanselliott61 @ gmail.com
 
-<font size="0.5">
+  
+    
+      
 [A faster way for Hans to check the surf report.](https://hans-elliott99.github.io/SurfReport.html)
-</font>
+

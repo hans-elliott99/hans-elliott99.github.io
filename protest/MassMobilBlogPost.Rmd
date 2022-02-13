@@ -307,7 +307,7 @@ stargazer(pv_lag,se = list(se_pv_lag),
 ```
 $~$
 
-The constant in this regression shows the likelihood of protester violence in period T when there were no prior violent protests. Nonviolence in periods T-1 and T-2 could be due to one of two events: 1) there were only nonviolent protests in prior periods; and 2) there were no protests at all in prior periods. In these cases, the likelihood of violence was 20.2% on average. If there was a violent protest in the previous period (T-1), protester violence in the current period was an additional 20.8% more likely, and if there was a violent protest 2 periods ago (T-2), the likelihood of protester violence was an additional 11.9% more likely. This indicates a compounding effect of protester violence, where past violence makes future violence more likely.
+The constant in this regression shows the likelihood of protester violence in period T when there were no prior violent protests. Nonviolence in periods T-1 and T-2 could be due to one of two events: 1) there were only nonviolent protests in prior periods; and 2) there were no protests at all in prior periods. In these cases, the likelihood of violence was 20.2% on average. If there was a violent protest in the previous period (T-1), protester violence in the current period was an additional 20.8 percentage points (p.p.) more likely, and if there was a violent protest 2 periods ago (T-2), the likelihood of protester violence was an additional 11.9 p.p. more likely. This indicates a significant compounding effect of protester violence, where past violence makes future violence more likely.
 
 
 
@@ -527,8 +527,7 @@ cm <- c('protesterviolence.lag1' = 'Protester Violence (T-1)',
         'protesterviolence' = 'Protester Violence (T)')
 modelsummary(mod, statistic = c("s.e. = {std.error}",
                                 "p = {p.value}"), stars = T,
-             gof_omit = 'DF|Deviance|AIC|BIC|Log.Lik|Std.Errors|
-             R2 Adj.|R2 Within|R2 Pseudo',
+             gof_omit = 'DF|Deviance|AIC|BIC|Log.Lik|Std.Errors|R2 Adj.|R2 Within|R2 Pseudo',
              title = "Table 6: Regressions with Fixed Effects",
              coef_map = cm)
 ```

@@ -108,7 +108,7 @@ lmV_Y <- lm(rate_violence ~ year, data = MMbyYear)
 ```
 
 
-```{r,echo=FALSE, warning=FALSE,message=FALSE,fig.width=10,fig.height=8,fig.align='center'}
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.width=10,fig.height=8,fig.align='center'}
 #grouped plot:
 p_load(cowplot)
 p <- cowplot::plot_grid(PlotYear1,PlotYear2,PlotYear3)
@@ -479,7 +479,7 @@ stargazer(p.s_accom,p.s_ignore,p.s_crowd,p.s_arrests,p.s_beat,p.s_shoot,p.s_kill
 
 $~$
 
-Again, coefficients are to be interpreted relative to the constant, which is the mean likelihood of violence when all independent variables (protester violence in previous periods) are 0 (i.e., nonviolent). On average, when protesters were violent in the last protest, the likelihood of accommodation was 0.4% lower for the next protest, although this estimate is not statistically significant from zero. Violence in the last period made the likelihood of the state ignoring the protest 4.8% lower on average, and made crowd dispersal mechanisms 4.8% more likely on average. These effects were statistically significant and the robust standard errors indicate some precision. For each of the other models, the predicted effect of violence in the last protest on the likelihoods of arrests, beatings, shootings, and killings, respectively, was not statistically significant from zero.
+Again, coefficients are to be interpreted relative to the constant, which is the mean likelihood of violence when all independent variables (protester violence in previous periods) are 0 (i.e., nonviolent). On average, when protesters were violent in the last protest, the likelihood of accommodation was 0.4 p.p lower for the next protest, although this estimate is not statistically significant from zero. Violence in the last period made the likelihood of the state ignoring the protest 4.8 p.p. lower on average, and made crowd dispersal mechanisms 4.8 p.p. more likely on average. These effects were statistically significant and the robust standard errors indicate that the point estimates are precise. For each of the other models, the predicted effect of violence in the last protest on the likelihoods of arrests, beatings, shootings, and killings, respectively, was not statistically significant from zero.
 These results suggest that violent protests reduce the likelihood that states will ignore the next protest, but that violence in the last protest does not necessarily predict what response the state will take to the next protest when they choose not to ignore (although crowd dispersal has the highest probability). This indicates that states tend to react harsher to the current protest when the last protest was violent.
 Overall, the magnitudes of the coefficients on the protester violence lag are much smaller than those of the current period coefficients, indicating that protester violence in the current period was a stronger predictor of the chosen state response than protester violence in the last period. Protester violence in the current period had statistically significant effects in all of the models. Notably, protester violence tends to decrease the likelihood of the accommodation and ignore response, while increasing the likelihood of all of the other, more forceful responses.
 

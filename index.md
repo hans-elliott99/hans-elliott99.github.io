@@ -10,7 +10,8 @@ Did you know that when state governments choose to respond with force to protest
 [Read my project about anti-state mobilizations here.](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html)  
 
 #### Machine Learning
-Currently learning statistical learning methods. Recent project completed on [Kaggle.](https://www.kaggle.com/hanselliott/)
+[Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit).  
+In this project we train regression and calssification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use. 
 
 #### Sustainable Development
 Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation. [Link.](https://hans-elliott99.github.io/ASI_Elliott.pdf)

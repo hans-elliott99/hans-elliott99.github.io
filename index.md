@@ -1,5 +1,7 @@
 ## Welcome
-I am a graduate student studying economics, interested in applied micro and econometrics, among other things.  
+- I am a master's student studying economics, interested in applied micro and econometrics, among other things.  
+- I am currently looking for opportunities related to applied economic research, and hope to use econometric & data science methods to learn about our world.
+- I enjoy developing my data science skills, and am eager to learn more about statistics and information economics.
 
 [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  
 [Résumé](https://hans-elliott99.github.io/Resume.html)
@@ -7,7 +9,7 @@ I am a graduate student studying economics, interested in applied micro and econ
 # Recent Projects  
 #### Machine Learning
 [Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit).  
-In this project we train regression and calssification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use. 
+In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use. 
 
 
 #### Data Analysis

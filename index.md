@@ -35,5 +35,9 @@ An undergraduate economics thesis about the Oregon labor market and community co
 [Consumer Spending Forecast](https://hans-elliott99.github.io/EconomicForecasting.pdf)
 
 
+#### Data Viz
+[TidyTuesday - 02.22.22](https://hans-elliott99.github.io/tidy_tuesday/tt_babynames.html)
+
+
 ### Contact
 hanselliott61 'at'  gmail 'dot' com

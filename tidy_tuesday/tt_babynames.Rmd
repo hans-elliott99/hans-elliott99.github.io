@@ -3,6 +3,8 @@ title: "Tidy Tuesday (02/22/2022) - Baby Names"
 output:
   html_document:
     theme: united
+    includes:
+        after_body: footer.html
 ---
 ![](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/tidy_tuesday/output/hansliam_timeseries.gif)  
 

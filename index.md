@@ -36,7 +36,7 @@ An undergraduate economics thesis about the Oregon labor market and community co
 
 
 #### Data Viz
-[TidyTuesday - 02.22.22](https://hans-elliott99.github.io/tidy_tuesday/tt_babynames.html)
+[TidyTuesday - 03.22.22](https://hans-elliott99.github.io/tidy_tuesday/tt_babynames.html)
 
 
 ### Contact

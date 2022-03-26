@@ -4,7 +4,7 @@ output:
   html_document:
     theme: united
 ---
-![](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/tidy_tuesday/hansliam_timeseries.gif)  
+![](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/tidy_tuesday/output/hansliam_timeseries.gif)  
 
 I've been wanting to experiment with making a theme completely from scratch, and with gganimation animated plots, so this is the result.  
 Growing up with a twin brother, I heard our names said together more often than I heard either said individually. There was frequent debate over whose name ought to be said first in the sequence. While Liam is by far the more popular name in recent history, we can clearly see that Hans precedes Liam by about 50 years (at least in this data). That seems like good enough evidence to me.  

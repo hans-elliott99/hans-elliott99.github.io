@@ -20,7 +20,10 @@ h1 { /* Header 1 */
 ![](https://raw.githubusercontent.com/hans-elliott99/mass-mobilization/main/protest.photo.JPG)
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 setwd("C:/Users/hanse/Desktop/EC523/ZMassMobilization")
-knitr::opts_chunk$set(echo=FALSE)    #hides all code in output
+knitr::opts_chunk$set(echo=FALSE,         #set code chunk options
+                      cache = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
 
 library(pacman)
 p_load(tidyverse, stargazer, broom, sandwich, paletteer)
@@ -267,7 +270,7 @@ where $\alpha =$ No Prior Violence (the likelihood of violence when neither inde
 
 
 This is a linear probability model because the dependent variable — protester violence — is binary. Each coefficient is interpreted as the change in the probability that a protest is violent given that the independent variable is true (i.e., that the protest in that period was violent), and the predicted values are the predicted probabilities that a protest is violent given the independent variables.   
-Again, heteroskedasticity-consistent robust standard errors are calculated for all regressions in this section.
+Again, heteroskedasticity-consistent robust standard errors are calculated for all regressions in this section. This is essential since linear probability models suffer from heteroskedasticity by construction.  
 ```{r,results='hide'}
 ## Creating 2 Lag Variables:
 MMprotests <- MMprotests %>% group_by(id.year) %>%

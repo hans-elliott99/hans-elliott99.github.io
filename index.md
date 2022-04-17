@@ -6,7 +6,7 @@
   
 # Recent Projects  
 #### Machine Learning
-[Deep learning from scratch in base R](https://hans-elliott99.github.io/neural-net-from-scratch/blogpost/nnfs-blogpost.html)
+[Deep learning from scratch in base R](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html)
 
 [Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit).  
 In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.  

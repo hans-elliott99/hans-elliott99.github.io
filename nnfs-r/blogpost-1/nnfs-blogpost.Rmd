@@ -27,7 +27,7 @@ Learning how each component of a neural network works and then building them wit
 This project is inspired by the ["Neural Networks from Scratch in Python"](https://nnfs.io/) book, which does an excellent job explaining the intuition, math, and implementation of each step in a neural network. I cannot recommend it enough.  
 
 # The Task
-This function simulates data in a spiral form with 3 labels, as seen below. This provides us with a basic _multi-class classification_ task, where we want the neural network to learn the decision boundaries that effectively separate each class.
+This function simulates data in a spiral form with 3 labels, as seen below. This provides us with a basic _multi-class classification_ task, where we want the neural network to learn the decision boundaries that effectively separate each class. This function is inspired by this [Stanford course](https://cs231n.github.io/neural-networks-case-study/).  
 ```{r sim-data}
 ## A function to simulate spiral data
 sim_data_fn = function(

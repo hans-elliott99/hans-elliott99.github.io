@@ -506,7 +506,9 @@ neural network. I cannot recommend it enough.</p>
 <p>This function simulates data in a spiral form with 3 labels, as seen
 below. This provides us with a basic <em>multi-class classification</em>
 task, where we want the neural network to learn the decision boundaries
-that effectively separate each class.</p>
+that effectively separate each class. This function is inspired by this
+<a href="https://cs231n.github.io/neural-networks-case-study/">Stanford
+course</a>.</p>
 <pre class="r"><code>## A function to simulate spiral data
 sim_data_fn = function(
   N = 100, # number of points per class

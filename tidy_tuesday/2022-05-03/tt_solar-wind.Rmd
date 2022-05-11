@@ -6,7 +6,7 @@ output:
   html_document:
     theme: united
     includes:
-      after_body: tidy_tuesdayfooter.html
+      after_body: footer.html
 ---
 
 ```{r setup, include=FALSE}
@@ -37,7 +37,7 @@ pacman::p_load(dplyr, magrittr, forcats, tidyr, #for cleaning/sorting/filtering
 
 [My code is available on github](https://github.com/hans-elliott99/hans-elliott99.github.io/tree/main/tidy_tuesday/2022-05-03).   
 
-```{r, results='hide'}
+```{r, results='hide', cache=TRUE}
 #DATA
 #load in (most recent) TidyTuesday data using tidytuesdayR package
 raw = tidytuesdayR::tt_load(2022, week = 18)
@@ -55,34 +55,39 @@ energy_info = merge(raw$capacity, raw$average_cost, by = "year")
 
 
 
-```{r}
-
-
-
-energy_info %>%
+```{r, fig.width=4, fig.height=3}
+p1 = 
+energy_info %>% ##reorder factor levels
+  mutate(type = fct_reorder2(type, year, total_gw, .desc = F)) %>% 
   ggplot(aes(x = year)) +
     geom_area(aes(y = total_gw, 
-                  fill = fct_reorder2(type, year, total_gw, .desc = F)), 
+                  fill = type), ,
               alpha = 0.5) +
     scale_fill_viridis_d(option = "viridis", begin = 0.1, end = 1) +
-    labs(fill = "U.S. Energy Production",
-         y = "Total gigawatts produced", x = "") +
+    labs(title = "U.S. Energy Production",
+         y = "Total gigawatts produced", x = "",
+         fill = "") +
     theme_ipsum() +
     theme(legend.position = "top",
-          legend.direction = "horizontal",
+          legend.direction = "vertical",
           legend.text = element_text(size = 8),
           legend.key.size = unit(0.3, 'cm')
           )
+plotly::plotly_build(p1)
+```
 
+
+```{r}
 ##faceted version
 energy_info %>% filter(type != "Storage") %>%
   mutate(type = factor(type, levels = c("Solar", "Wind", "Gas",
                                         "Nuclear", "Coal",
                                         "Other"))) %>%
   ggplot(aes(x = year)) +
-    geom_area(aes(y = total_gw, 
-                  fill = fct_reorder2(type, year, total_gw, .desc = F)), 
+    geom_area(aes(y = total_gw, fill = type), 
               alpha = 0.5) +
+    geom_point(aes(y = total_gw), fill = "grey",
+              alpha = 0.3, size = 0.5, shape = 18) +
     scale_fill_viridis_d(option = "viridis", begin = 0.1, end = 1) +
     labs(fill = "U.S. Energy Production",
          y = "Total gigawatts produced", x = "") +
@@ -90,7 +95,9 @@ energy_info %>% filter(type != "Storage") %>%
     theme_ipsum() +
     theme(legend.position = "none",
           text = element_text(size = 8),
-          axis.text = element_text(size = 5)
+          axis.text = element_text(size = 5),
+          panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank()
           )
 
 ```
@@ -183,6 +190,7 @@ sw %>%
           legend.direction = "horizontal",
           legend.text = element_text(size = 10),
           legend.key.size = unit(0.3, 'cm'),
+          panel.grid.minor = element_blank(),
           plot.caption = ggtext::element_markdown()
           ) +
     labs(title = "U.S. Renewables Market",

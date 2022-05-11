@@ -1,0 +1,42 @@
+---
+title: "C(art)ography"
+author: ""
+date: ""
+output:
+  html_document:
+      includes:
+        after_body: footer.html
+      css: style.css
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/hanse/Desktop/GitHub/")
+```
+Exploring digital cartography as a creative outlet and to gain experience with relevant software.
+
+## Blender Shaded Relief Maps
+Inspired by folks like [Daniel Huffman](https://somethingaboutmaps.wordpress.com/) and [Scott Reinhard](https://scottreinhard.com/) who are bringing old topo maps to life using digital elevation models.  
+
+Rather than creating a hillshade in a GIS program, Blender can be used to create more aesthetically pleasing hillshades. I use ArcGIS Pro for data gathering & reprojection, Blender to create a 3d model of the terrain and simulate a hillshade, and Adobe Photoshop for combining the hillshade with the old topo maps. Still a lot to learn and improve upon, but I enjoy learning new programs and this was a good excuse to get my feet wet in Blender.
+
+### Island of Kauai
+Hillshade made in Blender:  
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/BlenderKauai.jpg)  
+
+Final:
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/KauaiWithBathCompressed.jpg)  
+
+Compare to original image from [Ball State University Digital Media library](https://dmr.bsu.edu/digital/collection/USTpMp/id/25):  
+![](https://dmr.bsu.edu/digital/api/singleitem/image/USTpMp/25/default.jpg)   
+
+### Bryn Mawr, PA
+An older shaded relief I made for my sister who goes to school in the area.
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/BrynMawrPosterCompressed.jpg) 
+
+Turns out it's a rather flat chunk of the Earth. Topo map from [USGS historical topo collection](https://www.usgs.gov/programs/national-geospatial-program/historical-topographic-maps-preserving-past).
+
+## Bay Area Land Cover Map Poster
+Made in the style of a WPA poster. ArcGIS Pro and Photoshop. Inspired by [John Nelson](https://www.esri.com/arcgis-blog/author/j_nelson/).  
+
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/BayAreaWPACompressed.jpg)
+

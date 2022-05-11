@@ -1,0 +1,37 @@
+---
+title: "A (Geospatial) History of the Premier League"
+author: ""
+date: "1/1/2022"
+output:
+  html_document:
+    includes:
+          after_body: footer.html
+    css: style.css
+---
+
+The Premier League offically became England's top football division in 1992, after clubs in the first division of the Football League struck a lucrative television deal with Sky UK. This interactive map shows the location of each club that has participated in the Premier League each season.  
+[Try this link if the map doesn't load.](https://arcg.is/1Gif0b)  
+
+<iframe width="800" height="600" frameborder="0" allowfullscreen src="https://experience.arcgis.com/experience/ec592b99965e43fdb56e3fc3f94c68f9?org=UO-online"></iframe>
+
+### Historical Details
+**1992-93:** Ispwich, Middlesbrough, Blackburn promoted from the old Football League system into the Premier League.  
+**1994-95:** After this season, only 2 teams are promoted while 4 teams are relegated in order to transition the PL from 22 to 20 teams.  
+**1995-96:** Last year in PL that Bolton plays in Burnden Park, their home from 1895 to 1997.  
+**1996-97:** Derby County's last season at Baseball Ground, their home stadium from 1895 to 1997. They relocate to the Pride Park Stadium at the end of the season.  
+**1999-2000:** Wimbldeon FC's final year in the PL. The historic club, formed in 1889, become MK Dons in 2004. While in the PL, they share Selhurst Park with Crystal Palace because they lack a home stadium.  
+**2000-01:** Southampton's last season in The Dell, their home since 1898. They move to St. Mary's Stadium, the largest football stadium in Southern England outside of London.  
+**2000-01:** Coventry City's last season in the top flight of English football after 34 consecutive seasons. They play in Highfield Road, their home from 1899 until 2005.  
+**2002-03:** Man City leave Maine Road at the end of the season, their home since 1923. They move to the Etihad.  
+**2002-2004:** Fulham share Loftus Road with QPR from 2002 to 2004 while Craven Cottage is closed for reconstruction.  
+**2015-16:** West Ham's final season in Boleyn Ground, their home since 1904. They move to London Stadium, which was constructed for the 2012 Summer Olympics.  
+**2016-17:** Tottenham's last season at White Hart Lane, their home since 1899. It is demolished after the season, and Tottenham play at Wembley Stadium while Tottenham Hotspur Stadium is constructed. Their first game in the new stadium isn't played until 2019.  
+
+
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/2021_22_PL.png)  
+
+### Sources
+I created this data by scraping Wikipedia's records of each PL season. The final data set will be uploaded to my GitHub. Most historical information also came from Wikipedia.  
+The map content was created with ArcGIS Pro, and the web map experience with ArcGIS Online. I created my own [Premier League style](https://uo-online.maps.arcgis.com/home/item.html?id=beb490f999f9435a91de66aa893d332b) to use team crests. This is now public through ESRI for use by anyone.
+
+

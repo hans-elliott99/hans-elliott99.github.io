@@ -1,0 +1,30 @@
+---
+title: ""
+author: ""
+date: ""
+output: 
+  html_document:
+      includes:
+        after_body: footer.html
+      css: style.css
+---
+```{r, echo=FALSE}
+setwd("C:/Users/hanse/Desktop/GitHub/")
+```
+
+
+## Vulnerability to Climate Change in Oregon
+The first independent GIS project I completed, using ArcGIS software and a variety of datasets. It is a simple explortation of using geospatial data and visualizaing it on multivariate maps to search for geospatial patterns.
+
+### Excerpt
+  Climate change is expected to be experienced around the world through an increase in the severity and occurrence of heat waves, increased drought, and extreme weather events, among other phenomena. These events disproportionately impact those who already struggle with climate variability and exacerbate socioeconomic inequality among those who do not have the resources to adapt (Adger, Paavola, & Huq, 2006). This differentiated vulnerability to the impacts of climate change originates from social and environmental processes and is not separate from the context of the political economy (p. 5). Research shows that changes in the climate of the western US have fostered more favorable fire conditions and that human-caused climate change will continue to increase the potential for forest fires (Abatzoglou & Williams, 2016). In Oregon specifically, rising temperatures and prolonged droughts are increasing the spread of wildfires (Michelle, 2021). Therefore, it is important to understand how different households and communities are differentially vulnerable to the increased risk of wildfires so that resources can be directed to the most vulnerable communities and individuals.  
+	Given that climate change adaptation is becoming increasingly important, this project seeks to understand how geospatial data and analysis can be used to identify areas of high dual vulnerability - that is, areas where socioeconomic vulnerability is high and likely to be exacerbated by the changing environment. Using the state of Oregon as a case study, this project considers the impacts of wildfires and drought on Oregon’s communities. This process could be considered a kind of site suitability model for adaptation funding in Oregon, with the objective being to identify communities that match a certain degree of socioeconomic and environmental vulnerability.
+
+### Maps
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/Layout1_PovertyFires.jpg)  
+
+![](https://raw.githubusercontent.com/hans-elliott99/GIS/main/Layout2_DroughtFirePov.jpg)
+
+
+
+

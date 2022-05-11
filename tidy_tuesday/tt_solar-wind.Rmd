@@ -1,0 +1,188 @@
+---
+title: "TidyTueday - US Solar/Wind"
+author: "Hans Elliott"
+date: "2022-05-03"
+output: 
+  html_document:
+    theme: united
+    includes:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE,
+                      dpi = 200)
+```
+
+```{r}
+## LOAD LIBRARIES
+if (!require("pacman")) install.packages("pacman")
+##
+pacman::p_load(dplyr, magrittr, forcats, tidyr, #for cleaning/sorting/filtering
+               tidytuesdayR,                  #for accessing the data
+               ggplot2, plotly,               #for plotting
+               ggthemes, hrbrthemes, ggtext, cowplot)  
+
+
+##also going to use the in-development ggblend package (nvrmnd req R >= 4.2)
+#remotes::install_github("mjskay/ggblend")
+#p_load(ggblend)
+
+```
+
+
+[This week's Tidy Tuesday data focuses on US power plants](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-05-03/readme.md). 
+```{r, results='hide'}
+#DATA
+#load in (most recent) TidyTuesday data using tidytuesdayR package
+raw = tidytuesdayR::tt_load(2022, week = 18)
+
+##comes with several datasets
+solar = raw$solar %>% mutate(date = as.Date(date, orgin = '2009-01-20')) #%>%
+         #rename(mwh = solar_mwh, capacity = solar_capacity)
+wind = raw$wind %>% mutate(date = as.Date(date, orgin = '2009-01-20'))# %>%
+        # rename(mwh = wind_mwh, capacity = wind_capacity)
+      
+
+energy_info = merge(raw$capacity, raw$average_cost, by = "year")
+
+```
+
+
+
+```{r}
+
+
+
+energy_info %>%
+  ggplot(aes(x = year)) +
+    geom_area(aes(y = total_gw, 
+                  fill = fct_reorder2(type, year, total_gw, .desc = F)), 
+              alpha = 0.5) +
+    scale_fill_viridis_d(option = "viridis", begin = 0.1, end = 1) +
+    labs(fill = "U.S. Energy Production",
+         y = "Total gigawatts produced", x = "") +
+    theme_ipsum() +
+    theme(legend.position = "top",
+          legend.direction = "horizontal",
+          legend.text = element_text(size = 8),
+          legend.key.size = unit(0.3, 'cm')
+          )
+
+##faceted version
+energy_info %>% filter(type != "Storage") %>%
+  mutate(type = factor(type, levels = c("Solar", "Wind", "Gas",
+                                        "Nuclear", "Coal",
+                                        "Other"))) %>%
+  ggplot(aes(x = year)) +
+    geom_area(aes(y = total_gw, 
+                  fill = fct_reorder2(type, year, total_gw, .desc = F)), 
+              alpha = 0.5) +
+    scale_fill_viridis_d(option = "viridis", begin = 0.1, end = 1) +
+    labs(fill = "U.S. Energy Production",
+         y = "Total gigawatts produced", x = "") +
+    facet_wrap(~type, scales = "free") +
+    theme_ipsum() +
+    theme(legend.position = "none",
+          text = element_text(size = 8),
+          axis.text = element_text(size = 5)
+          )
+
+```
+
+
+```{r}
+mwh_caption = "A megawatt hour (MWh) equals 1,000 kilowatts of electricity generated per hour."
+
+
+solar_wind = merge(solar, wind, by = "date", all = T)
+cap = solar_wind %>% select(date, contains("capacity")) %>%
+        rename(solar = solar_capacity, wind = wind_capacity) %>%
+        pivot_longer(!date, names_to =  "class", values_to = "capacity")
+mwh = solar_wind %>% select(date, contains("mwh")) %>%
+        rename(solar = solar_mwh, wind = wind_mwh) %>%
+        pivot_longer(!date, names_to = "class", values_to = "mwh")
+
+sw = merge(cap, mwh, by = c("date","class"), all = T)
+
+
+##make time series scatter
+ts_plot = sw %>%
+  ggplot(aes(x = date)) +
+    geom_point(aes(y = mwh, color = class), alpha = 0.5) +
+    scale_color_viridis_d(option = "viridis", begin = 0.7, end = 1,
+                          direction = -1) +
+    theme_ipsum() +
+    theme(legend.position = "top",
+          legend.direction = "horizontal",
+          legend.text = element_text(size = 10),
+          legend.key.size = unit(0.3, 'cm')
+          ) +
+    labs(title = "U.S. Renewables Prices",
+         x = "Date", y = "Price ($/MWh)", color = "",
+         caption = mwh_caption)
+
+##create y-axis histogram (requires cowplot)
+class_hist = cowplot::axis_canvas(ts_plot, "y") +
+  geom_histogram(
+    data = sw,
+    bins = 40,
+    aes(y = mwh, fill = class),
+    color = "white", alpha = 0.6
+  ) +
+  scale_fill_viridis_d(option = "viridis", begin = 0.7, end = 1,
+                          direction = -1)
+
+##draw y axis hist ontop of ts_plot (requires ggdraw)
+ts_plot %>%
+    insert_yaxis_grob(class_hist) %>%
+    ggdraw()
+
+```
+
+
+```{r}
+label_colors =
+  c("all" = "grey75", "solar" = "#FDE725FF", "wind" = "#55C667FF")
+
+sw %>%
+  ggplot() + 
+    ##create layer of grey points (all points)
+    geom_point(
+      data = \(x) select(x, -class),
+      aes(x = capacity, y = mwh, color = "all"),
+      size = 1, alpha = 0.3
+    ) +
+    ##format layer of points colored by class
+    geom_point(
+      aes(x = capacity, y = mwh, color = class),
+      size = 1, alpha = 0.4
+    ) +
+    ##format regression lines
+    geom_line(stat = "smooth", method = "lm",
+              aes(x = capacity, y = mwh),
+              color = "midnightblue", 
+              size = 0.8, alpha = 0.6) +
+    facet_wrap(vars(class)) +
+    scale_color_manual(name = NULL, values = label_colors) +
+    theme_ipsum() +
+    theme(legend.position = "none",
+          legend.direction = "horizontal",
+          legend.text = element_text(size = 10),
+          legend.key.size = unit(0.3, 'cm')
+          ) +
+    labs(title = "U.S. Renewables Market",
+         subtitle = "Naive demand estimation",
+         x = "Capacity", y = "Price ($/MWh)") +
+    coord_cartesian(ylim = c(0, 350))
+
+```
+
+
+
+
+
+
+

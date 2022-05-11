@@ -6,7 +6,7 @@ output:
   html_document:
     theme: united
     includes:
-      after_body: footer.html
+      after_body: tidy_tuesdayfooter.html
 ---
 
 ```{r setup, include=FALSE}
@@ -34,6 +34,9 @@ pacman::p_load(dplyr, magrittr, forcats, tidyr, #for cleaning/sorting/filtering
 
 
 [This week's Tidy Tuesday data focuses on US power plants](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-05-03/readme.md). 
+
+[My code is available on github](https://github.com/hans-elliott99/hans-elliott99.github.io/tree/main/tidy_tuesday/2022-05-03).   
+
 ```{r, results='hide'}
 #DATA
 #load in (most recent) TidyTuesday data using tidytuesdayR package

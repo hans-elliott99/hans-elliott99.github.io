@@ -24,21 +24,21 @@ In this project, I use visualizations and linear probability models to analyze a
 
 #### Sustainable Development
 *Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation.*  
-[An essay.](https://hans-elliott99.github.io/ASI_Elliott.pdf)
+[An essay.](https://hans-elliott99.github.io/loose-pdfs/ASI_Elliott.pdf)
 
 #### GIS Work
-[Premier League Geospatial History - Web Map](https://hans-elliott99.github.io/PLHistoryPost.html)  
-[Oregon Climate Change Project](https://hans-elliott99.github.io/GIS_I_Project.html)  
-[C(art)ograhpy](https://hans-elliott99.github.io/C-art-ography.html)  
+[Premier League Geospatial History - Web Map](https://hans-elliott99.github.io/GIS/PLHistoryPost.html)  
+[Oregon Climate Change Project](https://hans-elliott99.github.io/GIS/GIS_I_Project.html)  
+[C(art)ograhpy](https://hans-elliott99.github.io/GIS/C-art-ography.html)  
 
 #### Undergraduate Thesis
 *Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarization and the Evolving Role of the Community College*  
 
 An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
-[View PDF here.](https://hans-elliott99.github.io/HansElliott_Thesis.pdf)  
+[View PDF here.](https://hans-elliott99.github.io/loose-pdfs/HansElliott_Thesis.pdf)  
 
 #### Economic Forecasting
-[Consumer Spending Forecast](https://hans-elliott99.github.io/EconomicForecasting.pdf)
+[Consumer Spending Forecast](https://hans-elliott99.github.io/loose-pdfs/EconomicForecasting.pdf)
 
 
 #### Data Viz

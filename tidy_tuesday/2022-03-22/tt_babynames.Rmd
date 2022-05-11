@@ -1,0 +1,105 @@
+---
+title: "Tidy Tuesday (02/22/2022) - Baby Names"
+output:
+  html_document:
+    theme: united
+    includes:
+        after_body: footer.html
+---
+![](https://raw.githubusercontent.com/hans-elliott99/hans-elliott99.github.io/main/tidy_tuesday/output/hansliam_timeseries.gif)  
+
+I've been wanting to experiment with making a theme completely from scratch, and with gganimation animated plots, so this is the result.  
+Growing up with a twin brother, I heard our names said together more often than I heard either said individually. There was frequent debate over whose name ought to be said first in the sequence. While Liam is by far the more popular name in recent history, we can clearly see that Hans precedes Liam by about 50 years (at least in this data). That seems like good enough evidence to me.  
+
+*****
+
+
+### CODE
+```{r, results='hide', warning=FALSE, message=FALSE}
+#LIBRARIES
+library(pacman) #package management
+p_load(tidyverse, tidytuesdayR, extrafont, ggthemes)  #for datacleaning, extracting dataset, & aesthetics
+p_load(gganimate, magick) #for animation
+
+
+#LOAD DATA
+babynames = tidytuesdayR::tt_load(2022, week = 12)$babynames
+```
+
+
+```{r, warning=FALSE, message=FALSE}
+# glimpse data - lots of names!
+glimpse(babynames)
+```
+```{r}
+#quickly view number of names per year
+babynames %>% group_by(year) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = year, y = count)) + 
+  geom_point() + geom_line() +
+  labs(title = "How many names are accounted for each year?") +
+  ggthemes::theme_fivethirtyeight()
+```
+
+
+
+```{r, results='hide', warning=FALSE, message=FALSE}
+##MAKING ANIMATED TIME SERIES
+#load in extra fonts
+extrafont::loadfonts(device = "win")  #(need to run extrafont::install_fonts() if first time using) extrafont library
+
+# Animated time series
+anim_p1 = babynames %>% 
+  #filter names
+  filter((name == 'Hans' | name == 'Liam') & sex == 'M') %>%
+    #ggplot
+    ggplot(aes(x = year, y = prop, color = name)) + 
+      geom_point(alpha = 0.5, size = 0.8) + geom_line() +
+      labs(title = 'Liam & Hans throughout history', 
+           color = '',
+           x = 'year', y = 'proportion of all babynames',
+           caption = "By Hans Elliott (Twin = Liam Elliott) \n
+                      Data: TidyTuesday Baby Names (2022-03-22)"
+           ) +
+      scale_x_continuous(breaks = seq(1880, 2017, by = 8)) +
+      scale_color_manual(values = c("darkred", "blue4")) +
+      #build custom theme
+      theme(
+        panel.background = 
+          element_rect(fill = "#afddc1", color = "gray99"),
+        panel.grid.major = element_line(color = "honeydew2"),
+        panel.grid.minor = element_line(color = "honeydew2"),
+        plot.background = element_rect(fill = "honeydew2"),
+        plot.title = element_text(family = "Felix Titling", color = "darkseagreen4"),
+        axis.title.x = element_text(family = "Felix Titling", size = 11, color = "darkseagreen4"),
+        axis.title.y = element_text(family = "Felix Titling", size = 11, color = "darkseagreen4", vjust = 2),
+        axis.text = element_text(family = "Felix Titling", size = 9, color = "darkseagreen4"),
+        legend.background = element_rect(fill = "honeydew2"),
+        legend.key = element_rect(fill = "honeydew2"),
+        legend.text = element_text(family = "Felix Titling", color = "darkseagreen4", size = 10),
+        legend.position = "bottom",
+        plot.margin = margin(t=0.5,r=1,l=1,b=0.2, "cm"),
+        plot.caption.position = "plot",
+        plot.caption = element_text(family = "Felix Titling", size = 11, color = "darkseagreen4")
+      ) +
+      #add animation components from gganimate
+      transition_reveal(along = year) +
+      view_follow(fixed_x = T)
+
+  
+#Uncomment following lines to preview animation
+#animate(anim_p1, height = 800, width = 1000,  #animate & define dimensions
+#        end_pause = 50)                       #repeats first/last frame n times
+
+#Save animation as .gif
+magick::image_write(
+  animate(anim_p1, width = 1000, height = 1000, end_pause = 50), #specify dims, end_pause
+  "hansliam_timeseries.gif"
+)
+```
+
+
+
+
+
+

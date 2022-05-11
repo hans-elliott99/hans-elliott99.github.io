@@ -2,7 +2,7 @@
 Thanks for checking out my website. I am always grateful to connect with new people and appreciate you taking the time to see what I've been up to.    
 
 ### About Me
-- I am a master's student studying economics, interested in applied micro, econometrics, and machine learning. I hope to apply these skills to the study of humans and our interactions with the natural environment.    
+- I am a master's student studying economics, interested in applied micro, econometrics, and machine learning. I hope to apply these skills to the study of humans and our interactions with natural and digital environments.    
 - I am currently looking for opportunities related to applied economic research, computational social science, and data science.  
 - I enjoy developing my data science skills, and am eager to learn more about statistics and computer science.  
 - [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/Resume.html) 

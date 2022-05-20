@@ -18,8 +18,8 @@ Also see our [public Kaggle dataset.](https://www.kaggle.com/hanselliott/a-week-
 
 #### Causal Inference
 _Regression Discontinuity Replication:_ "New evidence on the impact of sustained exposure to air pollution on life expectancy 
-from China’s Huai River Policy" (Ebenstein et al. 2017).  
-[Code](https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html). [Write-up](https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf)
+from China’s Huai River Policy" (Ebenstein et al., 2017).  
+[Code](https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html). [Write-up](https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf).
 
 #### Data Analysis
 [Anti-State Protests: A Statistical Analysis](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html).   

@@ -16,6 +16,10 @@ To better understand deep learning, I am working on building a package of neural
 In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.  
 Also see our [public Kaggle dataset.](https://www.kaggle.com/hanselliott/a-week-of-zurich-transit)
 
+#### Causal Inference
+_Regression Discontinuity Replication:_ "New evidence on the impact of sustained exposure to air pollution on life expectancy 
+from China’s Huai River Policy" (Ebenstein et al. 2017).  
+[Code](https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html). [Write-up](https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf)
 
 #### Data Analysis
 [Anti-State Protests: A Statistical Analysis](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html).   
@@ -23,7 +27,7 @@ Did you know that when state governments choose to respond with force to protest
 In this project, I use visualizations and linear probability models to analyze a panel dataset of anti-state protests from around the world.
 
 #### Sustainable Development
-*Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation.*  
+_Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation._  
 [An essay.](https://hans-elliott99.github.io/loose-pdfs/ASI_Elliott.pdf)
 
 #### GIS Work
@@ -32,7 +36,7 @@ In this project, I use visualizations and linear probability models to analyze a
 [C(art)ograhpy](https://hans-elliott99.github.io/GIS/C-art-ography.html)  
 
 #### Undergraduate Thesis
-*Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarization and the Evolving Role of the Community College*  
+_Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarization and the Evolving Role of the Community College_  
 
 An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
 [View PDF here.](https://hans-elliott99.github.io/loose-pdfs/HansElliott_Thesis.pdf)  

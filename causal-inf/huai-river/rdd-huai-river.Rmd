@@ -1,0 +1,377 @@
+---
+title: "Regression Discontinuity: PM10 and the Huai River Policy"
+author: "Hans Elliott"
+output: 
+  html_document:
+    theme: readable
+---
+Partial replication of "New evidence on the impact of sustained exposure to air pollution on life expectancy from China’s Huai River Policy" (Ebenstein et al., 2017).  
+Original code by Hans Elliott.  
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      cache = TRUE,
+                      dpi = 200)
+```
+
+
+```{r libs, cache=FALSE}
+##Libraries
+# auto check for pacman package manager
+if (!require("pacman")) install.packages("pacman")
+# load libraries/install any uninstalled libraries
+p_load(haven, here,                 ##for loading data
+       ggplot2, hrbrthemes, ggpubr, ##for plotting
+       fixest, broom,               ##for regression
+       kableExtra,                  ##for making tables
+       janitor, dplyr)              ##for data cleaning, manipulation
+
+
+## set default ggplot colors
+options(ggplot2.discrete.colour = c("#ffc20a", "#0c7bdc"))
+
+```
+
+
+```{r load-data}
+##Load Data
+huai = here("causal-inf/huai-river", "huairiver.dta") %>% haven::read_dta()
+
+huai = huai %>% filter(!is.na(pm10)) ##drop obs with missing outcome var
+nrow(huai) ##the number of obs. matches the sample size from the study
+```
+
+
+
+```{r pm10-plot}
+##Binned scatter: PM10
+huai %>% 
+  ##Change names and ordering of group labels for nice legend
+  mutate(north_huai = ifelse(north_huai==1, "North of Huai", 
+                                            "South of Huai"),
+         north_huai = factor(north_huai, levels = c("South of Huai",
+                                                    "North of Huai"))
+         ) %>%
+  ##Plot
+  ggplot() +
+  #geom_point(aes(x = dist_huai, y = pm10)) +
+  stat_summary_bin(aes(x = dist_huai, y = pm10, 
+                   color = north_huai),
+                   fun = 'mean', bins = 30, 
+                   alpha = 0.5, size = 0.8) +
+  ##add fitted lines (polynomials) for south/north of huai
+  geom_smooth(huai[huai$north_huai==0,],
+              mapping = aes(x = dist_huai, y = pm10, 
+                            fill = "Cubic Regression"),
+              method = lm, formula = "y ~ x + I(x^2) + I(x^3)",
+              se = FALSE, color = "gray", alpha = 0.5) +
+  geom_smooth(huai[huai$north_huai==1,],
+              mapping = aes(x = dist_huai, y = pm10,
+                            fill = "Cubic Regression"),
+              method = lm, formula = "y ~ x + I(x^2) + I(x^3)",
+              se = FALSE, color = "grey", alpha = 0.5) +
+  scale_fill_manual(name = "", values = c("Cubic Regression"="gray")) +
+  ##add huai river line
+  geom_vline(xintercept = 0, linetype = "dashed", color = "lightblue",
+             alpha = 0.8) +
+  labs(title = "PM10 at the Huai River Boundary",
+       x = "Degrees North of the Huai River Boundary",
+       y = "Mean PM10 (ug/m3)", color = "", fill = "") + 
+  scale_x_continuous(breaks = seq(-15, 15, by = 5)) +
+  hrbrthemes::theme_ipsum() + 
+  theme(legend.position = "top",
+        legend.direction = "horizontal",
+        axis.title.x = element_text(size = 12, hjust = 0.5))
+  
+```
+
+
+```{r plot-fn}
+##function for reproducing RD plots with different covariates
+fn_plot_covars = function(var, var_label, var_units){
+  
+  huai$var = var
+  huai %>% #filter(abs(dist_huai) <= 5) %>% ##optional bandwidth
+    ##Change names and ordering of group labels for nice legend
+    mutate(north_lab = ifelse(north_huai==1, "North of Huai", 
+                                              "South of Huai"),
+           north_lab = factor(north_lab, levels = c("South of Huai",
+                                                      "North of Huai"))
+           ) %>%
+    ##Plot
+    ggplot() +
+    #geom_point(aes(x = dist_huai, y = pm10)) +
+    stat_summary_bin(aes(x = dist_huai, y = var, 
+                     color = north_lab),
+                     fun = 'mean', bins = 30, 
+                     alpha = 0.5, size = 0.8) +
+    ##add fitted lines (polynomials) for south/north of huai
+    geom_smooth(. %>% filter(north_huai == 0),
+                mapping = aes(x = dist_huai, y = var,
+                              fill = "Cubic Regression"),
+                method = lm, formula = "y ~ x + I(x^2) + I(x^3)",
+                se = FALSE, color = "gray", alpha = 0.5) +
+    geom_smooth(. %>% filter(north_huai == 1),
+                mapping = aes(x = dist_huai, y = var, 
+                              fill = "Cubic Regression"),
+                method = lm, formula = "y ~ x + I(x^2) + I(x^3)",
+                se = FALSE, color = "gray", alpha = 0.5) +
+    scale_fill_manual(name = "", values = c("Cubic Regression"="gray")) +
+    ##add huai river line
+    geom_vline(xintercept = 0, linetype = "dashed", color = "lightblue",
+               alpha = 0.8) +
+    labs(title = paste0(var_label),
+         y = paste0("Mean ",var_label,"(",var_units,")"), 
+         x = "", color = "") + 
+    scale_x_continuous(breaks = seq(-15, 15, by = 5)) +
+    hrbrthemes::theme_ipsum() + 
+    theme(legend.position = "none",
+          axis.title.x = element_text(size = 12, hjust = 0.9),
+          plot.title = element_text(size = 12))
+
+}
+```
+
+
+```{r covar-plots, fig.width=12, fig.height=8}
+##Create grid of covariate plots
+
+covar_grid = ggpubr::ggarrange(
+  fn_plot_covars(huai$temp, "Temperature ", "Fahrenheit") + 
+                theme(legend.position = "none"),
+  fn_plot_covars(huai$prcp, "Precipitation ", "Millimeters") +
+                theme(legend.position = c(0.5,-1),
+                      legend.direction = "horizontal"),
+  fn_plot_covars(huai$wspd, "Wind Speed ", "m/s") +
+                theme(legend.position = "none"),
+    nrow = 2, ncol = 2,
+    top = "Covariates at the Huai River Boundary"
+   # common.legend = TRUE, legend = "bottom"
+)
+##Plot the grid and add annotations
+ann_plt = ggpubr::annotate_figure(covar_grid, 
+        top = text_grob("Covariates at the Huai River Boundary",
+                           size = 15, family = "Arial Narrow"),
+        bottom = text_grob("Degrees North of the Huai River Boundary",
+                           vjust = -2, size = 12,
+                           family = "Arial Narrow")
+        )
+ann_plt
+##Second layer of annotations to add caption
+# annotate_figure(ann_plt, 
+#     bottom = text_grob("Fitted lines from cubic regression models.", 
+#                         size = 10, vjust = -1, hjust = -1, 
+#                         family = "Arial Narrow", face = "italic")
+#                 )
+```
+
+
+
+```{r rd-regs}
+##Regression Discontinuity analysis
+
+# library(fixest)
+##pm10
+rd_pm10 = feols(pm10 ~ north_huai + ##coef of interest
+                       dist_huai +  ##running var
+                       I(dist_huai^2) + I(dist_huai^3) + ##polynomials
+                       north_huai*dist_huai +            ##interactions
+                       north_huai*I(dist_huai^2) +
+                       north_huai*I(dist_huai^3),
+                data = huai %>% filter(abs(dist_huai) <= 5), ##bandwidth
+                vcov = "HC1")
+
+summary(rd_pm10)
+##Other covariates
+rd_covars = feols(c(temp, prcp, wspd) ~ ##feols will run 3 indiv. regs 
+                       north_huai + 
+                       dist_huai +  
+                       I(dist_huai^2) + I(dist_huai^3) + 
+                       north_huai*dist_huai +            
+                       north_huai*I(dist_huai^2) +
+                       north_huai*I(dist_huai^3),
+                data = huai %>% filter(abs(dist_huai) <= 5),
+                vcov = "HC1")
+summary(rd_covars)
+
+##combine results
+rd_results = 
+  cbind(outcome = c("pm10", "temp", "prcp", "wspd"),
+    rbind(
+      tidy(rd_pm10) %>% filter(term == "north_huai"),
+      tidy(rd_covars$temp) %>% filter(term == "north_huai"),
+      tidy(rd_covars$prcp) %>% filter(term == "north_huai"),
+      tidy(rd_covars$wspd) %>% filter(term == "north_huai")
+      ) 
+  ) %>% janitor::clean_names() %>% ##format column names
+        mutate(across(where(is.numeric), round, digits=3)) ##round digits
+
+
+#make 95% CIs
+rd_results = rd_results %>% 
+             mutate(ci_lb = round(estimate - 1.96*std_error, 2),
+                    ci_ub = round(estimate + 1.96*std_error, 2),
+                    ci_95 = paste0("(",ci_lb,", ", ci_ub,")"),
+                    ##add n_obs information
+                    n_obs = c(rd_pm10$nobs, rd_covars$temp$nobs,
+                              rd_covars$prcp$nobs, rd_covars$wspd$nobs)
+                    )
+
+
+##make table
+rownames(rd_results) = c("PM10   (ug/m3)", "Temperature   (degrees F)", 
+                         "Precipitation   (mm)", "Wind Speed   (m/s)")
+
+rd_results %>%
+  select(estimate, ci_95, p_value, n_obs) %>%
+  rename("Point Estimate" = estimate,
+         "95% Confidence Interval" = ci_95,
+         "p-value" = p_value,
+         "No. Obs. (5 degrees sample)" = n_obs) %>% 
+  t() %>% ##transpose table so outcome vars = columns, not rows
+  kbl(caption =
+ "Estimated Discontinuities in Outcomes at the Huai River Boundary") %>%
+    kable_styling() %>%
+    column_spec(column = 3:5, background = "Gainsboro") %>%
+    column_spec(column = 1:5, 
+                extra_css = "border-bottom: 1px solid GhostWhite") %>%
+    column_spec(column = 1:2, border_left = "1px solid Gainsboro",
+                border_right = "1px solid Gainsboro") %>%
+    footnote(general = c("<small>Estimates from cubic regression discontinuity models. Sample limited to 5 degrees north and south of the Huai River. Heteroskedasticity robust SEs used for confidence intervals.</small>"),
+             general_title = "<small>Note:</small>",
+             footnote_as_chunk = TRUE,
+             escape = FALSE)
+
+```
+
+
+```{r manip-test}
+##Visual test for manipulation
+
+huai %>%
+  filter(abs(dist_huai) <= 5) %>%
+  ggplot(aes(x = dist_huai)) +
+  geom_histogram(aes(y = ..density..),
+                 bins = 20, color = "white", fill = "wheat3") +
+  geom_density(lwd = 0.25, color = 4, fill = 4, alpha = 0.1) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "lightblue",
+               alpha = 0.8) +
+  labs(title = "Visual Test for Manipulation",
+       subtitle = 
+         "Distribution of cities by degrees north of the Huai River",
+         y = "Density", 
+         x = "Degrees North of the Huai River Boundary") + 
+  scale_x_continuous(breaks = seq(-5, 5, by = 1)) +
+  hrbrthemes::theme_ipsum() + 
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 12, hjust = 0.9),
+        plot.title = element_text(size = 12),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(color = "gray92")
+        )
+  
+```
+
+
+
+```{r placebos, fig.width=10, fig.height=6}
+#Replicating figure 4 (Placebo test)
+
+##Run regressions
+fn_placebo_regress = function(){
+  placebo = data.frame()
+  for (i in -5:5){ ##loop through the different displacement intervals
+    displacement = i
+    
+    huai_placebo = huai %>% 
+      mutate(dist_huai = dist_huai + i, ##displace city's distance to huai
+             north_huai = ifelse(dist_huai > 0, 1, 0)) 
+                                      ##update dummy based on fake distance
+    
+    ##run placebo regression
+    placebo_lm = feols(pm10 ~ north_huai + ##coef of interest
+                           dist_huai +  ##running var
+                           I(dist_huai^2) + I(dist_huai^3) + ##polynomials
+                           north_huai*dist_huai +            ##interactions
+                           north_huai*I(dist_huai^2) +
+                           north_huai*I(dist_huai^3),
+                    data = huai_placebo %>% filter(abs(dist_huai) <= 5),
+                    vcov = "HC1")
+    ##create temp dataset
+    tmp = cbind(displacement,
+                tidy(placebo_lm) %>% filter(term == "north_huai")
+          )
+    ##append to placebo results
+    placebo = rbind(placebo, tmp)
+  }
+  list("results" = placebo)
+}
+placebo = fn_placebo_regress()
+
+##Prep results
+placebo = placebo$results %>%
+            janitor::clean_names() %>% ##clean-up var names
+            select(-term, -statistic) %>% ##drop unwanted vars
+            ##add 95% CI for plot
+            mutate(ci_lb = round(estimate - 1.95996*std_error, 2),
+                    ci_ub = round(estimate + 1.95996*std_error, 2)
+            )
+
+
+##Plot
+placebo_title = "Placebo Test: Estimated PM10 discontinuities at fake and true Huai River locations"
+placebo_legend = "Point estimate from cubic regression. 95% confidence interval."
+
+placebo %>%
+  ggplot(aes(x = displacement)) +
+    ##add true Huai River market
+    geom_vline(xintercept = 0, linetype = "dashed", color = "lightblue",
+               alpha = 0.8) +
+    annotate("text", x = 0.65, y = -90, label = "True Huai River",
+             color = "skyblue1", size = 3.5) +
+    ##add horizontal line at zero for emphasis
+    geom_hline(yintercept = 0, alpha = 0.1) +
+    ##plot point estimates and confidence interval line ranges
+    geom_point(aes(y = estimate, color = "Point estimate from cubic regression. 95% confidence interval."), 
+               size = 2.3) +
+    geom_linerange(aes(ymin = ci_lb, ymax = ci_ub, 
+                       color = "Point estimate from cubic regression. 95% confidence interval."),
+                   alpha = 0.5) +
+    scale_color_manual(name = "",
+                       values = c("Point estimate from cubic regression. 95% confidence interval."="black")
+                       ) +
+    labs(title = placebo_title,
+         #subtitle = "Point estimate and 95% confidence interval",
+         y = "Estimated discontinuity in PM10 (ug/m3)", 
+         x = 
+    "Cutoff location relative to true Huai River (degrees north)",
+         caption = "Heteroskedasticity robust SEs used for confidence intervals.") + 
+    scale_x_continuous(breaks = seq(-5, 5, by = 1)) +
+    hrbrthemes::theme_ipsum() + 
+    theme(legend.position = "top",
+          legend.text = element_text(color = "gray30", size = 12),
+          axis.title.x = element_text(size = 12, hjust = 0.5,
+                                      color = "gray60"),
+          axis.title.y = element_text(color = "gray60", size = 12),
+          plot.title = element_text(size = 12),
+          plot.subtitle = element_text(color = "gray60"),
+          plot.caption = element_text(color = "gray70", size = 9),
+          panel.grid.minor.x = element_blank()
+          )
+
+```
+
+
+
+
+
+
+
+
+
+
+
+

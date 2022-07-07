@@ -12,6 +12,9 @@ Thanks for checking out my website. I am always grateful to connect with new peo
 [Deep learning from scratch in base R](https://etatxd-hans0elliott.shinyapps.io/shiny/).   
 To better understand deep learning, I am working on building a package of neural network functions from "scratch." [Old blogpost](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html).  
 
+[Herbarium 2022: Plant Classification](https://www.kaggle.com/code/hanselliott/herbarium22-cnn-wandb).  
+Used Python to import plant images, apply preprocessing, and create/train a Convolutional Neural Network (using Keras + TensorFlow). This notebook also demonstrates how to integrate `Weights & Biases` into deep learning code to track model performance and tuning.   
+
 [Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit).  
 In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.  
 Also see our [public Kaggle dataset.](https://www.kaggle.com/hanselliott/a-week-of-zurich-transit)

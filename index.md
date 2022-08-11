@@ -2,9 +2,9 @@
 Thanks for checking out my website. I am always grateful to connect with new people and appreciate you taking the time to see what I've been up to.    
 
 ### About Me
-- I am a master's student studying economics, interested in applied micro, econometrics, and machine learning. I hope to apply these skills to the study of humans and our interactions with natural and digital environments.    
-- I am currently looking for opportunities related to quantitative policy research, computational social science, and data science.  
-- I enjoy developing my data science skills, and am eager to learn more about statistics and computer science.  
+- I am a master's student studying economics, interested in applications of data science, econometrics, and machine learning to environmental issues. I believe that data science has a vital role to play particularly in the tracking, measurement, and evaluation of humanity’s impact on the environment.      
+- I am currently looking for opportunities related to data science, quantitative policy research, and computational social science.    
+- I enjoy developing my data science skills and am eager to learn more about statistics and computer science.  
 - [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/Resume.html) 
   
 # Recent Projects  

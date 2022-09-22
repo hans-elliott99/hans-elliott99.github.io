@@ -3,30 +3,32 @@ Thanks for checking out my website. I am always grateful to connect with new peo
 
 ### About Me
 - I am a master's student studying economics, interested in applications of data science, econometrics, and machine learning to environmental issues. I believe that data science has a vital role to play in mitigating climate change particularly in the tracking, measurement, and evaluation of humanity’s impact on the environment.  
-- I am currently looking for opportunities related to data science, quantitative policy research, and computational social science.    
+- I am currently looking for opportunities related to data science, machine learning, and computational social science.    
 - I enjoy developing my data science skills and am eager to learn more about statistics and computer science.  
 - [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/resume-aug.pdf) 
   
 # Recent Projects  
-#### Machine Learning
-[Deep learning from scratch in base R](https://etatxd-hans0elliott.shinyapps.io/shiny/).   
-To better understand deep learning, I am working on building a package of neural network functions from "scratch." [Old blogpost](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html).  
+### Machine Learning
 
-[Toxic/Rash Plant Classification]().  
+**[Toxic/Rash Plant Classification](https://hans-elliott99-toxic-plant-classification-streamlitapp-egloqy.streamlitapp.com/)**  
 Used Python to [webscrape](https://github.com/hans-elliott99/toxic-plant-classification/blob/main/notebooks/scrape-iNaturalist.ipynb) an original dataset (now [available on Kaggle](https://www.kaggle.com/datasets/hanselliott/toxic-plant-classification)) of common North American rash plants. Then used transfer learning [to train a deep computer vision model](https://www.kaggle.com/code/hanselliott/tpc-basicresnet) which can classify plant images as either toxic or nontoxic with 86% test accuracy. This was a difficult task given its 'fine-grained' nature (differentiating between hard-to-distinguish object classes).  
 
-[Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit).  
+
+**[Deep learning from scratch in base R](https://etatxd-hans0elliott.shinyapps.io/shiny/)**   
+To better understand deep learning, I am working on building a package of neural network functions from "scratch." [Old blogpost](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html).  
+
+
+**[Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit)**  
 In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.  
 Also see our [public Kaggle dataset.](https://www.kaggle.com/hanselliott/a-week-of-zurich-transit)
 
-#### Causal Inference
+### Stats & Causal Inference
 _Regression Discontinuity Replication:_ "New evidence on the impact of sustained exposure to air pollution on life expectancy 
 from China’s Huai River Policy" (Ebenstein et al., 2017).  
 [Code](https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html). [Write-up](https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf).
 
-#### Data Analysis
 [Anti-State Protests: A Statistical Analysis](https://hans-elliott99.github.io/protest/MassMobilBlogPost.html).   
-Did you know that when state governments choose to respond with force to protests, they may increase the likelihood that future protesters use violence?  
+When state governments choose to respond with force to protests, they may increase the likelihood that future protesters use violence. 
 In this project, I use visualizations and linear probability models to analyze a panel dataset of anti-state protests from around the world.
 
 #### Sustainable Development
@@ -44,8 +46,6 @@ _Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarizati
 An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
 [View PDF here.](https://hans-elliott99.github.io/loose-pdfs/HansElliott_Thesis.pdf)  
 
-#### Economic Forecasting
-[Consumer Spending Forecast](https://hans-elliott99.github.io/loose-pdfs/EconomicForecasting.pdf)
 
 
 #### Data Viz

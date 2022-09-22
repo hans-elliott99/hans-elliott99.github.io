@@ -12,8 +12,8 @@ Thanks for checking out my website. I am always grateful to connect with new peo
 [Deep learning from scratch in base R](https://etatxd-hans0elliott.shinyapps.io/shiny/).   
 To better understand deep learning, I am working on building a package of neural network functions from "scratch." [Old blogpost](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html).  
 
-[Herbarium 2022: Plant Classification](https://www.kaggle.com/code/hanselliott/herbarium22-cnn-wandb).  
-Used Python to import plant images, apply preprocessing, and create/train a Convolutional Neural Network (using Keras + TensorFlow). This notebook also demonstrates how to integrate `Weights & Biases` into deep learning code to track model performance and tuning. [Also deployed a trained model as a web app](https://hans-elliott99-herb22-streamlitapp-b28rg7.streamlitapp.com/).  
+[Toxic/Rash Plant Classification]().  
+Used Python to [webscrape](https://github.com/hans-elliott99/toxic-plant-classification/blob/main/notebooks/scrape-iNaturalist.ipynb) an original dataset (now [available on Kaggle](https://www.kaggle.com/datasets/hanselliott/toxic-plant-classification)) of common North American rash plants. Then used transfer learning [to train a deep computer vision model](https://www.kaggle.com/code/hanselliott/tpc-basicresnet) which can classify plant images as either toxic or nontoxic with 86% test accuracy. This was a difficult task given its 'fine-grained' nature (differentiating between hard-to-distinguish object classes).  
 
 [Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit).  
 In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.  

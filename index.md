@@ -3,7 +3,7 @@ Thanks for checking out my website. I am always grateful to connect with new peo
 
 ### About Me
 - I recently graduated from a master's program in economics, and I am interested in applications of data science, statistics, and machine learning to social science research.  
-- I like to work on programming and data science projects. In my spare time I enjoy learning about and training neural networks. Someday I'd like to work on projects which use unstructured data to investigate society and policy.  
+- I like to work on programming and data science projects. In my spare time I enjoy learning about and training neural networks. Someday I'd like to work on projects that use unstructured data to investigate society and policy.  
 - [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/Resume.pdf) 
   
 # Recent Projects  

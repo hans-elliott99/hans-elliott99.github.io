@@ -2,27 +2,27 @@
 Thanks for checking out my website. I am always grateful to connect with new people and appreciate you taking the time to see what I've been up to.    
 
 ### About Me
-- I am a master's student studying economics, interested in applications of data science, econometrics, and machine learning to environmental issues. I believe that data science has a vital role to play in mitigating climate change particularly in the tracking, measurement, and evaluation of humanity’s impact on the environment.  
-- I am currently looking for opportunities related to data science, machine learning, and computational social science.    
-- I enjoy developing my data science skills and am eager to learn more about statistics and computer science.  
-- [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/resume-aug.pdf) 
+- I recently graduated from a master's program in economics, and I am interested in applications of data science, statistics, and machine learning to social science research.  
+- I like to work on programming and data science projects. In my spare time I enjoy learning about and training neural networks. Someday I'd like to work on projects which use unstructured data to investigate society and policy.  
+- [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/Resume.pdf) 
   
 # Recent Projects  
-### Machine Learning
+**[World Cup 2022 Prediction](https://www.kaggle.com/code/hanselliott/wc22-xgboost-simulation)**  
+I use historical data to fit a model which predicts result probabilities for a specific national-team matchup based on past matchup results, recent team performance, and FIFA ranking. Then I iteratively sample results from the probabilities and repeatedly fill out a bracket, saving the most common results over several thousand iterations.
 
 **[Toxic/Rash Plant Classification](https://hans-elliott99-toxic-plant-classification-streamlitapp-egloqy.streamlitapp.com/)**  
 Used Python to [webscrape](https://github.com/hans-elliott99/toxic-plant-classification/blob/main/notebooks/scrape-iNaturalist.ipynb) an original dataset (now [available on Kaggle](https://www.kaggle.com/datasets/hanselliott/toxic-plant-classification)) of common North American rash plants. Then used transfer learning [to train a deep computer vision model](https://www.kaggle.com/code/hanselliott/tpc-basicresnet) which can classify plant images as either toxic or nontoxic with 86% test accuracy. This was a difficult task given its 'fine-grained' nature (differentiating between hard-to-distinguish object classes).  
 
 
-**[Deep learning from scratch in base R](https://etatxd-hans0elliott.shinyapps.io/shiny/)**   
-To better understand deep learning, I am working on building a package of neural network functions from "scratch." [Old blogpost](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html).  
+**Deep learning from scratch**     
+A basic neutral network package built in R. [Shiny demo](https://etatxd-hans0elliott.shinyapps.io/shiny/). [Old blogpost](https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html).  
+A basic neural network built with the C++ standard library. [GitHub](https://github.com/hans-elliott99/CppNet).
 
 
 **[Predicting the Punctuality of Zürich Transit](https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit)**  
 In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.  
 Also see our [public Kaggle dataset.](https://www.kaggle.com/hanselliott/a-week-of-zurich-transit)
 
-### Stats & Causal Inference
 _Regression Discontinuity Replication:_ "New evidence on the impact of sustained exposure to air pollution on life expectancy 
 from China’s Huai River Policy" (Ebenstein et al., 2017).  
 [Code](https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html). [Write-up](https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf).
@@ -31,21 +31,17 @@ from China’s Huai River Policy" (Ebenstein et al., 2017).
 When state governments choose to respond with force to protests, they may increase the likelihood that future protesters use violence. 
 In this project, I use visualizations and linear probability models to analyze a panel dataset of anti-state protests from around the world.
 
-#### Sustainable Development
 _Avoid-Shift-Improve: The Role of Demand-Side Solutions in the Sustainable Development of Transportation._  
 [An essay.](https://hans-elliott99.github.io/loose-pdfs/ASI_Elliott.pdf)
 
-#### GIS Work
 [Premier League Geospatial History - Web Map](https://hans-elliott99.github.io/GIS/PLHistoryPost.html)  
 [Oregon Climate Change Project](https://hans-elliott99.github.io/GIS/GIS_I_Project.html)  
 [C(art)ograhpy](https://hans-elliott99.github.io/GIS/C-art-ography.html)  
 
-#### Undergraduate Thesis
 _Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarization and the Evolving Role of the Community College_  
 
 An undergraduate economics thesis about the Oregon labor market and community colleges. Successfully defended in June 2021.  
 [View PDF here.](https://hans-elliott99.github.io/loose-pdfs/HansElliott_Thesis.pdf)  
-
 
 
 #### Data Viz

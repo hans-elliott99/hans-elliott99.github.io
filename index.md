@@ -8,6 +8,9 @@ I upload projects here if I think they may be worth sharing or if they need a ho
 - [LinkedIn](https://www.linkedin.com/in/hans-elliott/)  &  [Résumé](https://hans-elliott99.github.io/Resume.pdf) 
   
 # Recent Projects  
+**[Image Color Palette Extractor](https://image-color-palette.hans-elliott99.repl.co/)**  
+Convert an image to an RGB color palette.   
+
 **[World Cup 2022 Simulation](https://www.kaggle.com/code/hanselliott/wc22-xgboost-simulation)**  
 I use historical data to fit a model which predicts result probabilities for a specific national-team matchup based on past matchup results, recent team performance, and FIFA ranking. Then I iteratively sample results from the probabilities and repeatedly fill out a bracket, saving the most common results over several thousand iterations.  
 

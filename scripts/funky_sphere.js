@@ -55,6 +55,13 @@ document.addEventListener('mousemove', function(event) {
   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 }, false);
 
+document.addEventListener('touchmove', function(event) {
+  event.preventDefault();
+
+  mouse.x = (event.changedTouches[0].clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.changedTouches[0].clientY / window.innerHeight) * 2 + 1;
+}, false);
+
 document.addEventListener('mousewheel', function(event){
   camera.position.z +=event.deltaY/500;
 });

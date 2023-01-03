@@ -1,27 +1,22 @@
 <html>
   <head>
     <title>Hans Elliott</title>
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      #title {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 36px;
-        color: white;
-        pointer-events: none;
-        z-index: 1;
-      }
-    </style>
+    <link rel="stylesheet" href="static/styles.css">
   </head>
   <body>
     <div id="container"></div>
-    <div id="title">Hans Elliott</div>
+    <div id="title-main">Hans Elliott</div>
+    <div id="title-second">...
+      <div id="par">Thanks for checking out my website!
+I upload projects here if I think they may be worth sharing or if they need a home on the internet. Please feel free to provide feedback or suggestions.</div>
+      <div id="par">
+        <a href="about.html">About me. </a>
+        <a href="projects.html">Projects. </a>
+        <a href="https://www.linkedin.com/in/hans-elliott/" target="_blank">LinkedIn</a> & <a href="Resume.pdf" target="_blank">Résumé</a>
+      </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r122/three.min.js"></script>
-    <script src="funky_sphere.js"></script>    
+    <script src="script.js"></script>    
   </body>
 </html>

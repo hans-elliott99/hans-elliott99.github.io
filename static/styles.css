@@ -2,7 +2,7 @@ html, body, form, fieldset, table, tr, td, img {
   margin: 6;
   padding: 0;
   font: 100%/150% Tahoma, sans-serif;
-  color: rgb(231, 206, 184);
+  color: rgb(192, 213, 219);
 }
 
 input, button, select, textarea, optgroup, option {
@@ -30,12 +30,12 @@ a:visited {
 
 a:hover {
   color: black;
-  background-color: rgb(250, 247, 221);
+  background-color: rgb(192, 213, 219);
   text-decoration: underline;
 }
 
 a:active {
   color: black;
-  background-color: rgb(250, 247, 221);
+  background-color: rgb(192, 213, 219);
   text-decoration: underline;
 }

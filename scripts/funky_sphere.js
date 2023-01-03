@@ -28,7 +28,7 @@ class RandColorMesh extends THREE.LineSegments {
   constructor(wireframe) {
     super(wireframe)
     this.material.depthTest   = false;
-    this.material.opacity     = 0.5;
+    this.material.opacity     = 0.7;
     this.material.transparent = true;
     this.colorTo = new THREE.Color(Math.floor(Math.random() * 16777216));
   }
@@ -43,6 +43,7 @@ class RandColorMesh extends THREE.LineSegments {
 }
 const mesh = new RandColorMesh(wireframe);
 scene.add(mesh);
+mesh.position.set(0,0.5,0)
 
 
 // Setup mouse movement
@@ -59,7 +60,7 @@ document.addEventListener('mousewheel', function(event){
 });
 
 // easter egg
-var rotation_speed = 0.7
+var rotation_speed = 0.3
 var speed_dir = -1
 document.addEventListener('keydown', function(event) {
   // if(event.key=="Enter")

@@ -10,6 +10,9 @@
         p {
             margin:0;
             padding:0;
+            width:600px;
+            text-align: left;
+            margin-bottom: 8;
         }
         li {
             margin-bottom: 8;
@@ -18,56 +21,50 @@
     </head>
     <body style="background-color:black;">
       <br>
+      <center>
       <h1>Recent Projects</h1>
-      <ul style="list-style-type:circle">
-        <li>
-            <h4><a href="https://image-color-palette.hans-elliott99.repl.co/" target="_blank">Image Color Palette Extractor</a></h4>
-            <p>Convert an image to an RGB color palette.</p>
-        </li>
-        <li>            
-            <h4><a href="https://www.kaggle.com/code/hanselliott/wc22-xgboost-simulation" target="_blank">World Cup 2022 Simulation</a></h4>
-            <p>I use historical data to fit a model which predicts result probabilities for a specific national-team matchup based on past matchup results, recent team performance, and FIFA ranking. 
-                Then I iteratively sample results from the probabilities and repeatedly fill out a bracket, saving the most common results over several thousand iterations.</p>
-        </li>
-        <li>
+        <h4><a href="https://image-color-palette.hans-elliott99.repl.co/" target="_blank">Image Color Palette Extractor</a></h4>
+        <p>Convert an image to an RGB color palette.</p>
+
+        <h4><a href="https://www.kaggle.com/code/hanselliott/wc22-xgboost-simulation" target="_blank">World Cup 2022 Simulation</a></h4>
+        <p>I use historical data to fit a model which predicts result probabilities for a specific national-team matchup based on past matchup results, recent team performance, and FIFA ranking. 
+            Then I iteratively sample results from the probabilities and repeatedly fill out a bracket, saving the most common results over several thousand iterations.</p>
+
             <h4><a href="https://hans-elliott99-toxic-plant-classification-streamlitapp-egloqy.streamlitapp.com/" target="_blank">Toxic/Rash Plant Classification</a></h4>
-            <p>Used Python to <a href="https://github.com/hans-elliott99/toxic-plant-classification/blob/main/notebooks/scrape-iNaturalist.ipynb">webscrape</a> an original dataset 
-                (now available <a href="https://www.kaggle.com/datasets/hanselliott/toxic-plant-classification">on Kaggle</a>) of common North American rash plants. 
-                Then used transfer learning to <a href="https://www.kaggle.com/code/hanselliott/tpc-basicresnet">train a deep computer vision model</a> which can classify plant images as either toxic or nontoxic with 86% test accuracy.
-                This was a difficult task given its 'fine-grained' nature (differentiating between hard-to-distinguish object classes).</p>
-        </li>
-        <li>
+        <p>Used Python to <a href="https://github.com/hans-elliott99/toxic-plant-classification/blob/main/notebooks/scrape-iNaturalist.ipynb">webscrape</a> an original dataset 
+            (now available <a href="https://www.kaggle.com/datasets/hanselliott/toxic-plant-classification">on Kaggle</a>) of common North American rash plants. 
+            Then used transfer learning to <a href="https://www.kaggle.com/code/hanselliott/tpc-basicresnet">train a deep computer vision model</a> which can classify plant images as either toxic or nontoxic with 86% test accuracy.
+            This was a difficult task given its 'fine-grained' nature (differentiating between hard-to-distinguish object classes).</p>
+
             <h4>Deep learning from scratch</h4>
-            <p>A basic neutral network package built in R. 
-                <a href="https://etatxd-hans0elliott.shinyapps.io/shiny/">Shiny demo</a>. 
-                <a href="https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html">Old blogpost.</a></p>
-            <p>A basic neural network built with the C++ standard library. <a href="https://github.com/hans-elliott99/CppNet">Github.</a></p>
-        </li>
-        <li>
-            <h4><a href="https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit" target="_blank">Predicting the Punctuality of Zürich Transit</a></h4>
-            <p>In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. 
-                We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.
-                Also see our public <a href="https://www.kaggle.com/hanselliott/a-week-of-zurich-transit">Kaggle dataset</a></p>
-        </li>
-        <li>
-            <h4>Causal Inference Replication</h4>
-            <p>Regression Discontinuity Replication: "New evidence on the impact of sustained exposure to air pollution on life expectancy from China’s Huai River Policy" (Ebenstein et al., 2017).</p>
-            <p><a href="https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html">Code.</a>
-                 <a href="https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf">Write-up.</a></p>
-        </li>
-        <li>
-            <h4>Misc.</h4>
-            <p><a href="../GIS/PLHistoryPost.html">Premier League Geospatial History - ArcGIS Web Map</a></p>
-            <p><a href="https://hans-elliott99.github.io/protest/MassMobilBlogPost.html">Anti-State Protests: A Statistical Analysis</a></p>
-        </li>
-      </ul>
+        <p>A basic neutral network package built in R. 
+            <a href="https://etatxd-hans0elliott.shinyapps.io/shiny/">Shiny demo</a>. 
+            <a href="https://hans-elliott99.github.io/nnfs-r/blogpost-1/nnfs-blogpost.html">Old blogpost.</a></p>
+        <p>A basic neural network built with the C++ standard library. <a href="https://github.com/hans-elliott99/CppNet">Github.</a></p>
+
+        <h4><a href="https://www.kaggle.com/hanselliott/predicting-the-punctuality-of-zurich-transit" target="_blank">Predicting the Punctuality of Zürich Transit</a></h4>
+        <p>In this project we train regression and classification models to predict the punctuality of tram rides in the Zürich pubic transit network. 
+            We believe that providing public transit riders with accurate predictions of arrival times can reduce hidden costs and increase use.
+            Also see our public <a href="https://www.kaggle.com/hanselliott/a-week-of-zurich-transit">Kaggle dataset</a></p>
+
+        <h4>Causal Inference Replication</h4>
+        <p>Regression Discontinuity Replication: "New evidence on the impact of sustained exposure to air pollution on life expectancy from China’s Huai River Policy" (Ebenstein et al., 2017).</p>
+        <p><a href="https://hans-elliott99.github.io/causal-inf/huai-river/rdd-huai-river.html">Code.</a>
+                <a href="https://hans-elliott99.github.io/causal-inf/huai-river/huai-river.pdf">Write-up.</a></p>
+
+        <h4>Misc.</h4>
+        <p><a href="../GIS/PLHistoryPost.html">Premier League Geospatial History - ArcGIS Web Map</a></p>
+        <p><a href="https://hans-elliott99.github.io/protest/MassMobilBlogPost.html">Anti-State Protests: A Statistical Analysis</a></p>
+
+      </center>
     </body>
   </html>
 
 <!-- Footer -->
 &nbsp;
+<center>
 <hr />
-<p style="text-align: center;"><a href="../index.html">Hans Elliott</a></p>
+<p style="text-align: center; "><a href="../index.html">Hans Elliott</a></p>
 <p style="text-align: center;"><span style="color: #808080;"><em>hanselliott61 at gmail dot com</em></span></p>
 
 <!-- Add icon library -->
@@ -79,5 +76,5 @@
     <a href="https://www.linkedin.com/in/hans-elliott/" <i class="fa fa-linkedin"></i></a>
     <a href="https://github.com/hans-elliott99" <i class="fa fa-github"></i></a>
 </p>
-
+</center>
 &nbsp;

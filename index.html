@@ -2,22 +2,68 @@
 <html lang="en">
   <head>
     <title>Hans Elliott</title>
-    <link rel="/stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/styles.css">
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #title-main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 36px;
+        color: white;
+        pointer-events: none;
+        z-index: 1;
+        font-weight: bold;
+      }
+      #title-second {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 36px;
+        color: inherit;
+        z-index: 1;
+        font-weight: bold;        
+      }
+      #header1 {
+        font-size: 24px;
+        color: inherit;
+        font-weight: bold;
+      }
+      #header2 {
+        font-size: 18px;
+        color: inherit;
+        font-weight: regular;
+      }
+      #par {
+        font-size: 12px;
+        color: inherit;
+        font-weight: regular;
+      }      
+    </style>
+
   </head>
   <body>
     <div id="container"></div>
     <div id="title-main">Hans Elliott</div>
-    <div id="title-second">...
+    <div id="title-second">
       <div id="par">Thanks for checking out my website!
-I upload projects here if I think they may be worth sharing or if they need a home on the internet. Please feel free to provide feedback or suggestions.</div>
+        I upload projects here if I think they may be worth sharing or if they need a home on the internet.
+        Please feel free to provide feedback or suggestions.</div>
       <div id="par">
-        <a href="about.html">About me. </a>
-        <a href="projects.html">Projects. </a>
-        <a href="https://www.linkedin.com/in/hans-elliott/" target="_blank">LinkedIn</a> & <a href="Resume.pdf" target="_blank">Résumé</a>
+        <p><a href="html/about.html">About me.</a></p>
+        <p><a href="html/projects.html">Projects.  </a></p>
+           <a href="https://github.com/hans-elliott99" target="_blank">Github</a> & 
+           <a href="https://www.linkedin.com/in/hans-elliott/" target="_blank">LinkedIn</a> & 
+           <a href="loose-pdfs/Resume.pdf" target="_blank">Résumé</a>
       </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r122/three.min.js"></script>
-    <script src="script.js"></script>    
+    <script src="scripts/funky_sphere.js"></script>    
   </body>
 </html>

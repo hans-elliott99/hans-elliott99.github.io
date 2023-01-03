@@ -1,64 +1,41 @@
-  body {
-    margin: 0;
-    overflow: hidden;
-  }
-  #title-main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 36px;
-    color: white;
-    pointer-events: none;
-    z-index: 1;
-    font-weight: bold;
-  }
-  #title-second {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 36px;
-    color: white;
-    pointer-events: none;
-    z-index: 1;
-    font-weight: bold;        
-  }
-  #header1 {
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
-  }
-  #header2 {
-    font-size: 18px;
-    color: white;
-    font-weight: regular;
-  }
-  #par {
-    font-size: 12px;
-    color: white;
-    font-weight: regular;
-  }
-  a:link {
-    color: white;
-    background-color: transparent;
-    text-decoration: underline;
-  }
+html, body, form, fieldset, table, tr, td, img {
+  margin: 6;
+  padding: 0;
+  font: 100%/150% Tahoma, sans-serif;
+  color: rgb(231, 206, 184);
+}
 
-  a:visited {
-    color: white;
-    background-color: transparent;
+input, button, select, textarea, optgroup, option {
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+body {
+  font-size: 0.875em;
+}
+
+a:link {
+  color: inherit;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: inherit;
+  background-color: transparent;
   text-decoration: none;
-  }
+}
 
-  a:hover {
-    color: black;
-    background-color: white;
-    text-decoration: underline;
-  }
+a:hover {
+  color: black;
+  background-color: rgb(250, 247, 221);
+  text-decoration: underline;
+}
 
-  a:active {
-    color: black;
-    background-color: white;
-    text-decoration: underline;
-  }
+a:active {
+  color: black;
+  background-color: rgb(250, 247, 221);
+  text-decoration: underline;
+}

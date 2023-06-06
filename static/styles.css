@@ -39,3 +39,9 @@ a:active {
   background-color: rgb(192, 213, 219);
   text-decoration: underline;
 }
+
+.imgrow {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}

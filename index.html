@@ -1,69 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Hans Elliott</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      #title-main {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 36px;
-        color: white;
-        pointer-events: none;
-        z-index: 1;
-        font-weight: bold;
-      }
-      #title-second {
-        position: absolute;
-        top: 80%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 36px;
-        color: inherit;
-        z-index: 1;
-        font-weight: bold;        
-      }
-      #header1 {
-        font-size: 24px;
-        color: inherit;
-        font-weight: bold;
-      }
-      #header2 {
-        font-size: 18px;
-        color: inherit;
-        font-weight: regular;
-      }
-      #par {
-        font-size: 12px;
-        color: inherit;
-        font-weight: regular;
-      }      
-    </style>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hans Elliott</title>
+  <meta name="description" content="Hans Elliott: research, projects, and software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<main>
 
-  </head>
-  <body>
-    <div id="container"></div>
-    <div id="title-main">Hans Elliott</div>
-    <div id="title-second">
-    <center>
-      <div id="par">
-        <p><a href="html/about.html">About.</a></p>
-        <p><a href="html/projects.html">Projects.  </a></p>
-           <a href="https://github.com/hans-elliott99">Github</a> | 
-           <a href="https://www.linkedin.com/in/hans-elliott/">LinkedIn</a>
-           </p>
-       <p><a href="html/rabbit-census.html">Seattle Rabbit Census.</a></p>
-      </div>
-    </center>
+  <header class="intro">
+    <img class="headshot" src="assets/headshot.jpg" alt="Hans Elliott">
+    <div>
+      <h1>Hans Elliott</h1>
+      <p class="tagline">Researcher, data analyst, student · Seattle, WA</p>
+      <p>
+        I studied economics at the University of Oregon and have worked
+        professionally as a research assistant, data analyst, and research scientist, most recently
+        at the Institute for Health Metrics and Evaluation at the University of Washington. Lately I've been studying
+        mathematics at UW while working at IHME, and I'm applying to graduate programs for Fall 2027 in applied math and statistics.
+      </p>
+      <ul class="contact">
+        <li><span class="muted">hanselliott61 [at] gmail [dot] com</span></li>
+        <!-- <li><a href="assets/resume_hans_elliott.pdf">CV</a></li> -->
+        <li><a href="https://github.com/hans-elliott99">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/hans-elliott/">LinkedIn</a></li>
+      </ul>
     </div>
+  </header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r122/three.min.js"></script>
-    <script src="scripts/funky_sphere.js"></script>    
-  </body>
+  <section>
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li>
+        <h3><a href="loose-pdfs/Math380_Project.pdf">A Glimpse at Algebraic Vision: An Introduction to the Multiview Variety</a></h3>
+        <p class="meta">Course project · 2026</p>
+        <p>UW Math 380 focused on computational algebraic geometry. As a final project, I explored applications of algebraic geometry to computer vision, a growing field known as "algebraic vision." I also attempted to implement some relevant computer vision algorithms.
+        </p>
+        <p class="links">
+          <a href="loose-pdfs/Math380_Project.pdf">Paper</a>
+          <a href="https://github.com/hans-elliott99/3d_triangulation">Code</a>
+        </p>
+      </li>
+      <li>
+        <h3><a href="loose-pdfs/hans_elliott_cugh25_poster.pdf">A Bayesian Approach for Extending National Health Accounts to Estimate Out-of-Pocket Spending on Maternal Health</a></h3>
+        <p class="meta">Poster presentation · 2025</p>
+        <p>Expanding on my work at the Institute for Health Metrics and Evaluation, I had the opportunity to present original research at the Consortium of Universities for Global Health conference in 2025, in Atlanta, GA.</p>
+        <p class="links">
+          <a href="loose-pdfs/hans_elliott_cugh25_poster.pdf">Poster</a>
+          <a href="projects/cugh-2025/">Photos</a>
+        </p>
+      </li>
+      <li>
+        <h3><a href="projects/uo-research/">Research Assistant, University of Oregon</a></h3>
+        <p class="meta">Lundquist College of Business · 2023</p>
+        <p>
+          Data extraction, linkage, and analysis on an HPC cluster, including
+          matching NOAA weather-station records to study subjects with a
+          nearest-neighbor search.
+        </p>
+      </li>
+      <li>
+        <h3><a href="https://github.com/hans-elliott99/toxic-plant-classification">Rash Plant Classification</a></h3>
+        <p class="meta">Computer vision / deep learning · Python · 2022</p>
+        <p>
+          Scraped an original image dataset of common North American rash
+          plants from iNaturalist, then used transfer learning to train a
+          deep vision model that classifies plants as toxic or nontoxic with
+          86% test accuracy. This was a difficult task given its 'fine-grained'
+          nature (differentiating between hard-to-distinguish object classes). 
+        </p>
+        <p class="links">
+          <a href="https://github.com/hans-elliott99/toxic-plant-classification">Code</a>
+          <a href="https://www.kaggle.com/datasets/hanselliott/toxic-plant-classification">Dataset</a>
+          <a href="https://www.kaggle.com/code/hanselliott/tpc-basicresnet">Model notebook</a>
+        </p>
+      </li>
+      <li>
+        <h3><a href="causal-inf/huai-river/huai-river.pdf">Regression Discontinuity Replication: Air Pollution and China's Huai River Policy</a></h3>
+        <p class="meta">Causal inference · R · 2022</p>
+        <p>
+          A replication of Ebenstein et al. (2017), "New evidence on the impact
+          of sustained exposure to air pollution on life expectancy from
+          China's Huai River Policy."
+        </p>
+        <p class="links">
+          <a href="causal-inf/huai-river/huai-river.pdf">Write-up</a>
+          <a href="causal-inf/huai-river/rdd-huai-river.html">Code</a>
+        </p>
+      </li>
+      <li>
+        <h3><a href="loose-pdfs/Final_Thesis-ElliottH.pdf">Aligning Oregon's Higher Education with a Changing Labor Market: Job Polarization and the Evolving Role of the Community College</a></h3>
+        <p class="meta">Undergraduate honors thesis · Department of Economics &amp; Clark Honors College, University of Oregon · 2021</p>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Software</h2>
+    <ul class="projects">
+      <li>
+        <h3><a href="https://github.com/hans-elliott99/grepvec">grepvec</a></h3>
+        <p class="meta">R package · C</p>
+        <p>
+          (Experimental package.) Quickly search a vector of strings for a vector of substrings or
+          regular expressions.
+        </p>
+      </li>
+      <li>
+        <h3><a href="https://github.com/hans-elliott99/therepy">therepy</a></h3>
+        <p class="meta">Python package</p>
+        <p>
+          A minimal Python take on R's <code>here</code> package for
+          project-relative file paths.
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Interactive Apps</h2>
+    <ul class="projects">
+      <li>
+        <h3><a href="https://observablehq.com/d/eec4be22a7677579">Intro Real Analysis: Continuity</a></h3>
+        <p class="meta">Observable notebook</p>
+        <p>An interactive explanation of the epsilon-delta definition of continuity.</p>
+      </li>
+      <li>
+        <h3><a href="https://etatxd-hans0elliott.shinyapps.io/single_species_growth/">Single-Species Population Growth</a></h3>
+        <p class="meta">Shiny app · R</p>
+        <p>An interactive exploration of a differential-equation model of single-species growth from quantitative ecology.</p>
+      </li>
+      <li>
+        <h3><a href="https://etatxd-hans0elliott.shinyapps.io/kelly_criterion/">Introducing the Kelly Criterion</a></h3>
+        <p class="meta">Shiny app · R</p>
+        <p>An interactive introduction to the Kelly criterion, and a derivation.</p>
+      </li>
+      <li>
+        <h3><a href="https://etatxd-hans0elliott.shinyapps.io/nnfR-shiny/">Neural Networks from Scratch in R</a></h3>
+        <p class="meta">Shiny app · R</p>
+        <p>
+          Demo of a small neural-network library written in base R.
+          <a href="nnfs-r/blogpost-1/nnfs-blogpost.html">Write-up</a>.
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Misc.</h2>
+    <ul class="projects">
+      <li>
+        <h3><a href="https://www.kaggle.com/code/hanselliott/wc22-xgboost-simulation">World Cup 2022 Simulation</a></h3>
+        <p class="meta">Kaggle notebook · Python</p>
+        <p>
+          A model of match-result probabilities from historical matchups,
+          recent form, and FIFA ranking, used to simulate the tournament bracket.
+        </p>
+      </li>
+      <li>
+        <h3><a href="GIS/PLHistoryPost.html">A (Geospatial) History of the Premier League</a></h3>
+        <p class="meta">ArcGIS web map</p>
+      </li>
+      <li>
+        <h3><a href="GIS/C-art-ography.html">C(art)ography</a></h3>
+        <p class="meta">ArcGIS, Blender, Photoshop</p>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 Hans Elliott</p>
+</footer>
+</body>
 </html>

@@ -1,0 +1,182 @@
+/* Shared styles for the home page and project pages. */
+
+:root {
+  --bg: #fdfdfc;
+  --text: #1f2328;
+  --muted: #5f6670;
+  --rule: #e3e3e0;
+  --link: #1d4f91;
+  --link-hover: #0f3466;
+  --max-width: 44rem;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181b;
+    --text: #e4e6e9;
+    --muted: #9aa1aa;
+    --rule: #2d3136;
+    --link: #8ab4f0;
+    --link-hover: #b5d0f7;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 100%; }
+
+body {
+  margin: 0;
+  padding: 3rem 1.25rem 2rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+main, .site-footer, .crumb {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 { font-size: 2.1rem; margin: 0 0 0.25rem; }
+
+h2 {
+  font-size: 1.35rem;
+  margin: 2.75rem 0 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h3 { font-size: 1.1rem; margin: 0 0 0.2rem; }
+
+p { margin: 0 0 1rem; }
+
+a { color: var(--link); text-decoration: none; }
+a:hover, a:focus-visible { color: var(--link-hover); text-decoration: underline; }
+
+img { max-width: 100%; height: auto; }
+
+.muted { color: var(--muted); }
+
+/* ---- Home page header: photo + name + bio ---- */
+
+.intro {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.intro .headshot {
+  flex: 0 0 auto;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--rule);
+}
+
+.intro .tagline {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 36rem) {
+  body { padding-top: 2rem; }
+  .intro { flex-direction: column; align-items: center; text-align: center; gap: 1.25rem; }
+  .intro p:not(.tagline) { text-align: left; }
+  .contact { justify-content: center; }
+}
+
+/* ---- Project list ---- */
+
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.projects > li { margin: 0 0 1.5rem; }
+
+.projects p { margin: 0.15rem 0 0; }
+
+.projects .meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.projects .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.45rem;
+  font-size: 0.92rem;
+  margin-top: 0.25rem;
+}
+
+.projects .links a + a::before {
+  content: "·";
+  color: var(--muted);
+  margin-right: 0.45rem;
+  display: inline-block;
+}
+
+/* ---- Project pages ---- */
+
+.crumb { font-size: 0.95rem; margin-bottom: 2rem; }
+
+.page-meta { color: var(--muted); margin: 0 0 2rem; }
+
+.figure { margin: 1.5rem 0; }
+.figure img { display: block; border: 1px solid var(--rule); }
+.figure figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+
+.figure-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.embed {
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  border: 1px solid var(--rule);
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Side-by-side photos at equal height; set each figure's flex to its width/height ratio. */
+.photo-pair { display: flex; gap: 1rem; align-items: flex-start; }
+.photo-pair .figure { min-width: 0; }
+.photo-pair img { width: 100%; }
+
+@media (max-width: 36rem) {
+  .photo-pair { flex-direction: column; }
+}

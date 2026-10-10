@@ -180,3 +180,26 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 36rem) {
   .photo-pair { flex-direction: column; }
 }
+
+/* ---- Section links (e.g. /#software) ---- */
+
+section, .projects > li { scroll-margin-top: 1.5rem; }
+
+h2 .anchor {
+  font-weight: 400;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+h2:hover .anchor, h2 .anchor:focus-visible { opacity: 1; text-decoration: none; }
+@media (hover: none) { h2 .anchor { opacity: 0.5; } }
+
+/* Briefly highlight a project when someone arrives via its link. */
+.projects > li:target {
+  animation: target-flash 2.5s ease-out;
+  border-radius: 4px;
+}
+@keyframes target-flash {
+  from { background: color-mix(in srgb, var(--link) 14%, transparent); }
+  to { background: transparent; }
+}
